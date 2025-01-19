@@ -1,0 +1,13 @@
+[
+    {
+        "model": "Dashboard.App",
+        "pk": 1,
+        "fields": {
+            "user_id": 1,
+            "url": "/",
+            "title": "عنوان نرم افزار",
+            "sett": "{\"icon\": \"icon.png\", \"favicon\": \"favicon.png\"}",
+            "status": 1
+        }
+    }
+]
