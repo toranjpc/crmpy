@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, UserOption
 
 class CustomUserAdmin(UserAdmin):
     # فیلدهایی که در لیست کاربران نمایش داده می‌شوند
@@ -22,5 +22,42 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
-# ثبت مدل User با کلاس ادمین سفارشی
 admin.site.register(User, CustomUserAdmin)
+
+
+
+
+class KindFilter(admin.SimpleListFilter):
+    title = 'نوع'  # عنوان فیلتر
+    parameter_name = 'kind'  # پارامتر URL
+
+    def lookups(self, request, model_admin):
+        # تعیین گزینه‌های فیلتر
+        return UserOption.KIND_CHOICES
+
+    def queryset(self, request, queryset):
+        # فیلتر کردن بر اساس مقدار انتخاب‌شده
+        if self.value():
+            return queryset.filter(kind=self.value())
+        return queryset
+    
+    
+@admin.register(UserOption)
+class CustomUserOption(admin.ModelAdmin):
+    list_display = ('title', 'kind', 'status')
+
+    fieldsets = (
+        ('datas', {'fields': ('title', 'option', 'status')}),
+    )
+
+    add_fieldsets = (   
+        (None, {
+            'classes': ('wide',),
+            'fields': ('title', 'option', 'status'),
+        }),
+    )
+    
+    list_filter = (KindFilter,)  # اضافه کردن فیلتر سفارشی
+    search_fields = ('user__username', 'kind')  # جستجو بر اساس نام کاربر و نوع
+    
+    list_per_page = 20

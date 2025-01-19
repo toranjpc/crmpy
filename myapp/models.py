@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 # from django.contrib.auth.models import User
-from .user_model import User
+from .user_model import User, UserOption
 
 class App(models.Model):
 
@@ -21,7 +21,8 @@ class App(models.Model):
 
 
     class Meta:
-        db_table = 'np_apps'  # استفاده از snake_case برای نام جدول
+        db_table = 'np_apps' 
 
     def __str__(self):
         return self.title or self.url
+    

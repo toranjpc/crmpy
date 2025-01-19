@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 # from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 class User(AbstractUser):
     
@@ -33,3 +34,30 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+    
+    
+    
+class UserOption(models.Model):
+    f_id = models.IntegerField(default=0)
+    title = models.CharField(max_length=255, null=True, blank=True)
+    option = models.JSONField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    KIND_CHOICES = [
+        ('UserExtData', _('UserExtData')), 
+    ]
+    kind = models.CharField(choices=KIND_CHOICES, max_length=255, null=True, blank=True)
+
+    Status_CHOICES = [
+    (1, _('active')),
+    (2, _('not active')),
+    ]
+    status = models.SmallIntegerField(choices=Status_CHOICES, default=1)
+
+    class Meta:
+        db_table = 'myapp_user_options'
+
+    def __str__(self):
+        return self.title or f"UserOption {self.id}"
+    
