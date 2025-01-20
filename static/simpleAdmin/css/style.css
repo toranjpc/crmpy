@@ -27,18 +27,11 @@ body {
     overflow        : hidden;
     overflow-y      : auto;
     z-index         : 999;
+    padding-top     : 50px;
 }
 
 .sidebar.collapsed {
     width: 0px;
-}
-
-.sidebar-header {
-    width           : 100%;
-    height          : 50px;
-    padding         : 0 10px;
-    text-align      : right;
-    background-color: var(--secondary-color);
 }
 
 .sidebar-menu {
@@ -105,10 +98,10 @@ body {
 .navbar {
     background-color: white;
     box-shadow      : 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding         : 10px 20px;
+    padding         : 10px 50px 10px 20px;
     position        : fixed;
     top             : 0;
-    right           : 180px;
+    right           : 0;
     left            : 0;
     z-index         : 1000;
     height          : 50px;
@@ -142,12 +135,14 @@ body {
 
 /* دکمه جمع‌شدن منو */
 .toggle-btn {
-    background-color: var(--primary-color);
+    background-color: transparent;
     border          : none;
-    color           : white;
+    color           : #000000;
     padding         : 10px;
     border-radius   : 5px;
     cursor          : pointer;
+    position        : absolute;
+    right           : 5px;
 }
 
 /* استایل لودینگ */
@@ -203,16 +198,12 @@ body {
         width: 50px;
     }
 
-    .sidebar.collapsed .sidebar-header h4,
     .sidebar.collapsed ul.sidebar-menu li .link-text,
     .sidebar.collapsed ul.sidebar-menu li .link-text,
     .sidebar.collapsed ul.sidebar-menu li .submenu {
         display: none;
     }
 
-    .navbar.expanded {
-        right: 50px;
-    }
 
     .main-content.expanded {
         margin-right: 50px;

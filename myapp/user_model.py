@@ -10,7 +10,6 @@ class User(AbstractUser):
     (2, 'Female'),
     ]
 
-
     f_id = models.IntegerField(default=0)
     sex = models.SmallIntegerField(choices=SEX_CHOICES, default=1)
     ircode = models.CharField(max_length=20, default="0", blank=True, null=True)
