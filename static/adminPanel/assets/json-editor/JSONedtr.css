@@ -1,0 +1,28 @@
+.jse--row {
+	position: relative;
+	width: calc(25% - 10px);
+	height: max-content;
+	float: right;
+	border: 1px solid #c1c1c1;
+	padding: 10px;
+	margin: 5px;
+	border-radius: 5px;
+}
+
+.jse--row--array,
+.jse--row-object,
+.jse--array,
+.jse--add {
+	width: calc(100% - 10px);
+}
+
+.jse--row input {
+	margin: 0 5px;
+	direction: ltr;
+}
+
+.jse--delete {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+}

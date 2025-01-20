@@ -12,5 +12,7 @@ Users_patterns = [
 ]
 
 urlpatterns = [
+    path("", views.dashboard, name='dashboard'),
+    
     path("users/", include(Users_patterns)),
 ]

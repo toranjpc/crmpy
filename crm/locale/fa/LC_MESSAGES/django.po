@@ -1,22 +1,3 @@
-# This file is distributed under the same license as the Django package.
-#
-# Translators:
-# Ahmad Hosseini <ahmadly.com@gmail.com>, 2020
-# Ali Nikneshan <ali@nikneshan.com>, 2015,2020
-# ali salehi, 2023
-# Ali Vakilzade <ali.vakilzade@gmail.com>, 2015
-# Aly Ahmady <better.aly.ahmady@gmail.com>, 2022
-# Amir Ajorloo <amirajorloo@gmail.com>, 2020
-# Arash Fazeli <a.fazeli@gmail.com>, 2012
-# Farshad Asadpour, 2021
-# Jannis Leidel <jannis@leidel.info>, 2011
-# MJafar Mashhadi <raindigital2007@gmail.com>, 2018
-# Mohammad Hossein Mojtahedi <Mhm5000@gmail.com>, 2017,2019
-# Peyman Salehi <peymanslh@protonmail.com>, 2023
-# Pouya Abbassi, 2016
-# rahim agh <rahim.aghareb@gmail.com>, 2021
-# Reza Mohammadi <reza@teeleh.ir>, 2013-2014
-# Sajad Rahimi <rahimisajad@outlook.com>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
@@ -32,45 +13,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\crm\templates\admin\404.html:4 .\crm\templates\admin\404.html:8
+msgid "dashboard"
+msgstr "داشبورد مدیریت"
+
 msgid "Page not found"
 msgstr "صفحه یافت نشد"
 
-#: .\crm\templates\admin\404.html:10
 msgid "We’re sorry, but the requested page could not be found."
 msgstr "شرمنده، صفحه مورد تقاضا یافت نشد."
 
-#: .\crm\templates\admin\500.html:6 .\crm\templates\admin\app_index.html:10
-#: .\crm\templates\admin\auth\user\change_password.html:15
-#: .\crm\templates\admin\base.html:76 .\crm\templates\admin\change_form.html:19
-#: .\crm\templates\admin\change_list.html:33
-#: .\crm\templates\admin\delete_confirmation.html:14
-#: .\crm\templates\admin\delete_selected_confirmation.html:14
-#: .\crm\templates\admin\invalid_setup.html:6
-#: .\crm\templates\admin\object_history.html:6
-#: .\crm\templates\registration\logged_out.html:4
-#: .\crm\templates\registration\password_change_done.html:13
-#: .\crm\templates\registration\password_change_form.html:16
-#: .\crm\templates\registration\password_reset_complete.html:6
-#: .\crm\templates\registration\password_reset_confirm.html:8
-#: .\crm\templates\registration\password_reset_done.html:6
-#: .\crm\templates\registration\password_reset_form.html:8
 msgid "Home"
 msgstr "شروع"
 
-#: .\crm\templates\admin\500.html:7
 msgid "Server error"
 msgstr "خطای سرور"
 
-#: .\crm\templates\admin\500.html:11
 msgid "Server error (500)"
 msgstr "خطای سرور (500)"
 
-#: .\crm\templates\admin\500.html:14
 msgid "Server Error <em>(500)</em>"
 msgstr "خطای سرور <em>(500)</em>"
 
-#: .\crm\templates\admin\500.html:15
 msgid ""
 "There’s been an error. It’s been reported to the site administrators via "
 "email and should be fixed shortly. Thanks for your patience."
@@ -78,69 +41,50 @@ msgstr ""
 "مشکلی پیش آمده. این مشکل از طریق ایمیل به مدیران وب‌گاه اطلاع داده شد و به "
 "زودی اصلاح می‌گردد. از صبر شما متشکریم."
 
-#: .\crm\templates\admin\actions.html:8
 msgid "Run the selected action"
 msgstr "اجرای حرکت انتخاب شده"
 
-#: .\crm\templates\admin\actions.html:8
 msgid "Go"
 msgstr "برو"
 
-#: .\crm\templates\admin\actions.html:16
 msgid "Click here to select the objects across all pages"
 msgstr "برای انتخاب موجودیت‌ها در تمام صفحات اینجا را کلیک کنید"
 
-#: .\crm\templates\admin\actions.html:16
 #, python-format
 msgid "Select all %(total_count)s %(module_name)s"
 msgstr "انتخاب تمامی %(total_count)s %(module_name)s"
 
-#: .\crm\templates\admin\actions.html:18
 msgid "Clear selection"
 msgstr "لغو انتخاب‌ها"
 
-#: .\crm\templates\admin\app_index.html:8 .\crm\templates\admin\base.html:73
 msgid "Breadcrumbs"
 msgstr ""
 
-#: .\crm\templates\admin\app_list.html:8
 #, python-format
 msgid "Models in the %(name)s application"
 msgstr "مدلها در برنامه %(name)s "
 
-#: .\crm\templates\admin\app_list.html:12
 msgid "Model name"
 msgstr ""
 
-#: .\crm\templates\admin\app_list.html:13
 msgid "Add link"
 msgstr ""
 
-#: .\crm\templates\admin\app_list.html:14
 msgid "Change or view list link"
 msgstr ""
 
-#: .\crm\templates\admin\app_list.html:29
 msgid "Add"
 msgstr "اضافه کردن"
 
-#: .\crm\templates\admin\app_list.html:36
-#: .\crm\templates\admin\edit_inline\stacked.html:20
-#: .\crm\templates\admin\edit_inline\tabular.html:40
 msgid "View"
 msgstr "مشاهده"
 
-#: .\crm\templates\admin\app_list.html:38
-#: .\crm\templates\admin\edit_inline\stacked.html:20
-#: .\crm\templates\admin\edit_inline\tabular.html:40
 msgid "Change"
 msgstr "تغییر"
 
-#: .\crm\templates\admin\app_list.html:50
 msgid "You don’t have permission to view or edit anything."
 msgstr "شما اجازهٔ مشاهده یا ویرایش چیزی را ندارید."
 
-#: .\crm\templates\admin\auth\user\add_form.html:6
 #, fuzzy
 #| msgid ""
 #| "First, enter a username and password. Then, you’ll be able to edit more "
@@ -150,154 +94,102 @@ msgstr ""
 "ابتدا یک نام کاربری و گذرواژه وارد کنید. سپس می توانید مشخصات دیگر کاربر را "
 "ویرایش کنید."
 
-#: .\crm\templates\admin\auth\user\change_password.html:5
-#: .\crm\templates\admin\change_form.html:4
-#: .\crm\templates\admin\change_list.html:4 .\crm\templates\admin\login.html:4
-#: .\crm\templates\registration\password_change_form.html:4
-#: .\crm\templates\registration\password_reset_confirm.html:4
-#: .\crm\templates\registration\password_reset_form.html:4
 msgid "Error:"
 msgstr ""
 
-#: .\crm\templates\admin\auth\user\change_password.html:19
-#: .\crm\templates\admin\auth\user\change_password.html:71
-#: .\crm\templates\admin\base.html:57
-#: .\crm\templates\registration\password_change_done.html:4
-#: .\crm\templates\registration\password_change_form.html:7
 msgid "Change password"
 msgstr "تغییر گذرواژه"
 
-#: .\crm\templates\admin\auth\user\change_password.html:19
 #, fuzzy
 #| msgid "New password:"
 msgid "Set password"
 msgstr "گذرواژهٔ جدید:"
 
-#: .\crm\templates\admin\auth\user\change_password.html:30
-#: .\crm\templates\admin\change_form.html:44
-#: .\crm\templates\admin\change_list.html:53
-#: .\crm\templates\admin\login.html:24
-#: .\crm\templates\registration\password_change_form.html:27
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-#: .\crm\templates\admin\auth\user\change_password.html:34
 #, python-format
 msgid "Enter a new password for the user <strong>%(username)s</strong>."
 msgstr "برای کابر <strong>%(username)s</strong> یک گذرنامهٔ جدید وارد کنید."
 
-#: .\crm\templates\admin\auth\user\change_password.html:36
 msgid ""
 "This action will <strong>enable</strong> password-based authentication for "
 "this user."
 msgstr ""
 
-#: .\crm\templates\admin\auth\user\change_password.html:72
 msgid "Disable password-based authentication"
 msgstr ""
 
-#: .\crm\templates\admin\auth\user\change_password.html:74
 msgid "Enable password-based authentication"
 msgstr ""
 
-#: .\crm\templates\admin\base.html:28
 msgid "Skip to main content"
 msgstr "انتقال به محتوای اصلی"
 
-#: .\crm\templates\admin\base.html:43
 msgid "Welcome,"
 msgstr "خوش آمدید،"
 
-#: .\crm\templates\admin\base.html:48
 msgid "View site"
 msgstr "نمایش وبگاه"
 
-#: .\crm\templates\admin\base.html:53
-#: .\crm\templates\registration\password_change_done.html:4
-#: .\crm\templates\registration\password_change_form.html:7
 msgid "Documentation"
 msgstr "مستندات"
 
-#: .\crm\templates\admin\base.html:61
-#: .\crm\templates\registration\password_change_done.html:7
-#: .\crm\templates\registration\password_change_form.html:10
 msgid "Log out"
 msgstr "خروج"
 
-#: .\crm\templates\admin\base_site.html:3
 msgid "Django site admin"
 msgstr "مدیریت وب‌گاه Django"
 
-#: .\crm\templates\admin\base_site.html:6
 msgid "Django administration"
 msgstr "مدیریت Django"
 
-#: .\crm\templates\admin\change_form.html:22
-#: .\crm\templates\admin\change_list_object_tools.html:8
 #, python-format
 msgid "Add %(name)s"
 msgstr "اضافه‌کردن %(name)s"
 
-#: .\crm\templates\admin\change_form_object_tools.html:5
-#: .\crm\templates\admin\object_history.html:10
 msgid "History"
 msgstr "تاریخچه"
 
-#: .\crm\templates\admin\change_form_object_tools.html:7
-#: .\crm\templates\admin\edit_inline\stacked.html:22
-#: .\crm\templates\admin\edit_inline\tabular.html:42
 msgid "View on site"
 msgstr "مشاهده در وب‌گاه"
 
-#: .\crm\templates\admin\change_list.html:78
 msgid "Filter"
 msgstr "فیلتر"
 
-#: .\crm\templates\admin\change_list.html:81
 msgid "Hide counts"
 msgstr ""
 
-#: .\crm\templates\admin\change_list.html:82
 msgid "Show counts"
 msgstr "نمایش تعداد"
 
-#: .\crm\templates\admin\change_list.html:85
 msgid "Clear all filters"
 msgstr "پاک کردن همه فیلترها"
 
-#: .\crm\templates\admin\change_list_results.html:16
 msgid "Remove from sorting"
 msgstr "حذف از مرتب سازی"
 
-#: .\crm\templates\admin\change_list_results.html:17
 #, python-format
 msgid "Sorting priority: %(priority_number)s"
 msgstr "اولویت مرتب‌سازی: %(priority_number)s"
 
-#: .\crm\templates\admin\change_list_results.html:18
 msgid "Toggle sorting"
 msgstr "تعویض مرتب سازی"
 
-#: .\crm\templates\admin\color_theme_toggle.html:3
 msgid "Toggle theme (current theme: auto)"
 msgstr "تغییر رنگ پوسته (حالت کنونی: خودکار)"
 
-#: .\crm\templates\admin\color_theme_toggle.html:4
 msgid "Toggle theme (current theme: light)"
 msgstr "تغییر رنگ پوسته (حالت کنونی: روشن)"
 
-#: .\crm\templates\admin\color_theme_toggle.html:5
 msgid "Toggle theme (current theme: dark)"
 msgstr "تغییر رنگ پوسته (حالت کنونی: تیره)"
 
-#: .\crm\templates\admin\delete_confirmation.html:18
-#: .\crm\templates\admin\submit_line.html:14
 msgid "Delete"
 msgstr "حذف"
 
-#: .\crm\templates\admin\delete_confirmation.html:25
 #, python-format
 msgid ""
 "Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
@@ -307,7 +199,6 @@ msgstr ""
 "حذف %(object_name)s·'%(escaped_object)s' می تواند باعث حذف اشیاء مرتبط شود. "
 "اما حساب شما دسترسی لازم برای حذف اشیای از انواع زیر را ندارد:"
 
-#: .\crm\templates\admin\delete_confirmation.html:30
 #, python-format
 msgid ""
 "Deleting the %(object_name)s '%(escaped_object)s' would require deleting the "
@@ -316,7 +207,6 @@ msgstr ""
 "حذف %(object_name)s '%(escaped_object)s' نیاز به حذف موجودیت‌های مرتبط محافظت "
 "شده ذیل دارد:"
 
-#: .\crm\templates\admin\delete_confirmation.html:35
 #, python-format
 msgid ""
 "Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
@@ -325,26 +215,18 @@ msgstr ""
 "آیا مطمئنید که می‌خواهید %(object_name)s·\"%(escaped_object)s\" را حذف کنید؟ "
 "کلیهٔ اشیای مرتبط زیر حذف خواهند شد:"
 
-#: .\crm\templates\admin\delete_confirmation.html:37
-#: .\crm\templates\admin\delete_selected_confirmation.html:31
 msgid "Objects"
 msgstr "اشیاء"
 
-#: .\crm\templates\admin\delete_confirmation.html:44
-#: .\crm\templates\admin\delete_selected_confirmation.html:42
 msgid "Yes, I’m sure"
 msgstr "بله، مطمئن هستم."
 
-#: .\crm\templates\admin\delete_confirmation.html:45
-#: .\crm\templates\admin\delete_selected_confirmation.html:43
 msgid "No, take me back"
 msgstr "نه، من را برگردان"
 
-#: .\crm\templates\admin\delete_selected_confirmation.html:17
 msgid "Delete multiple objects"
 msgstr "حذف اشیاء متعدد"
 
-#: .\crm\templates\admin\delete_selected_confirmation.html:23
 #, python-format
 msgid ""
 "Deleting the selected %(objects_name)s would result in deleting related "
@@ -354,7 +236,6 @@ msgstr ""
 "حذف %(objects_name)s انتخاب شده منجر به حذف موجودیت‌های مرتبط خواهد شد، ولی "
 "شناسه شما اجازه حذف اینگونه از موجودیت‌های ذیل را ندارد:"
 
-#: .\crm\templates\admin\delete_selected_confirmation.html:26
 #, python-format
 msgid ""
 "Deleting the selected %(objects_name)s would require deleting the following "
@@ -363,7 +244,6 @@ msgstr ""
 "حذف %(objects_name)s انتخاب شده نیاز به حذف موجودیت‌های مرتبط محافظت شده ذیل "
 "دارد:"
 
-#: .\crm\templates\admin\delete_selected_confirmation.html:29
 #, python-format
 msgid ""
 "Are you sure you want to delete the selected %(objects_name)s? All of the "
@@ -372,16 +252,13 @@ msgstr ""
 "آیا در خصوص حذف %(objects_name)s انتخاب شده اطمینان دارید؟ تمام موجودیت‌های "
 "ذیل به همراه موارد مرتبط با آنها حذف خواهند شد:"
 
-#: .\crm\templates\admin\edit_inline\tabular.html:26
 msgid "Delete?"
 msgstr "حذف؟"
 
-#: .\crm\templates\admin\filter.html:4
 #, python-format
 msgid " By %(filter_title)s "
 msgstr "براساس %(filter_title)s "
 
-#: .\crm\templates\admin\includes\object_delete_summary.html:2
 msgid "Summary"
 msgstr "خلاصه"
 
@@ -390,35 +267,27 @@ msgstr "فعال"
 msgid "not active"
 msgstr "غیرفعال"
 
-#: .\crm\templates\admin\index.html:23
 msgid "Recent actions"
 msgstr "فعالیتهای اخیر"
 
-#: .\crm\templates\admin\index.html:24
 msgid "My actions"
 msgstr "فعالیتهای من"
 
-#: .\crm\templates\admin\index.html:28
 msgid "None available"
 msgstr "چیزی در دسترس نیست"
 
-#: .\crm\templates\admin\index.html:33
 msgid "Added:"
 msgstr "اضافه شده:"
 
-#: .\crm\templates\admin\index.html:33
 msgid "Changed:"
 msgstr "ویرایش شده:"
 
-#: .\crm\templates\admin\index.html:33
 msgid "Deleted:"
 msgstr "حذف شده:"
 
-#: .\crm\templates\admin\index.html:43
 msgid "Unknown content"
 msgstr "محتوا ناشناخته"
 
-#: .\crm\templates\admin\invalid_setup.html:12
 msgid ""
 "Something’s wrong with your database installation. Make sure the appropriate "
 "database tables have been created, and make sure the database is readable by "
@@ -428,7 +297,6 @@ msgstr ""
 "درستی ایجاد شده‌اند و اطمینان حاصل کنید که بانک اطلاعاتی توسط کاربر مربوطه "
 "قابل خواندن می باشد."
 
-#: .\crm\templates\admin\login.html:40
 #, python-format
 msgid ""
 "You are authenticated as %(username)s, but are not authorized to access this "
@@ -437,52 +305,40 @@ msgstr ""
 "شما به عنوان %(username)sوارد شده اید. ولی اجازه مشاهده صفحه فوق را نداریدو "
 "آیا مایلید با کاربر دیگری وارد شوید؟"
 
-#: .\crm\templates\admin\login.html:60
 #, fuzzy
 #| msgid "Forgotten your password or username?"
 msgid "Forgotten your login credentials?"
 msgstr "گذرواژه یا نام کاربری خود را فراموش کرده‌اید؟"
 
-#: .\crm\templates\admin\login.html:64
-#: .\crm\templates\registration\password_reset_complete.html:15
 msgid "Log in"
 msgstr "ورود"
 
-#: .\crm\templates\admin\nav_sidebar.html:2
 msgid "Toggle navigation"
 msgstr "تعویض جهت یابی"
 
-#: .\crm\templates\admin\nav_sidebar.html:3
 msgid "Sidebar"
 msgstr "ستون کناری"
 
-#: .\crm\templates\admin\nav_sidebar.html:5
 msgid "Start typing to filter…"
 msgstr "آغار به کار نوشتن برای فیلترکردن ..."
 
-#: .\crm\templates\admin\nav_sidebar.html:6
 msgid "Filter navigation items"
 msgstr "فیلتر کردن آیتم های مسیریابی"
 
-#: .\crm\templates\admin\object_history.html:22
 msgid "Date/time"
 msgstr "تاریخ/ساعت"
 
-#: .\crm\templates\admin\object_history.html:23
 msgid "User"
 msgstr "کاربر"
 
-#: .\crm\templates\admin\object_history.html:24
 msgid "Action"
 msgstr "عمل"
 
-#: .\crm\templates\admin\object_history.html:49
 msgid "entry"
 msgid_plural "entries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: .\crm\templates\admin\object_history.html:52
 msgid ""
 "This object doesn’t have a change history. It probably wasn’t added via this "
 "admin site."
@@ -490,95 +346,72 @@ msgstr ""
 "این شیء هنوز تاریخچه تغییرات ندارد. ممکن است توسط این وب‌گاه مدیر ساخته نشده "
 "باشد."
 
-#: .\crm\templates\admin\pagination.html:10
-#: .\crm\templates\admin\search_form.html:9
 msgid "Show all"
 msgstr "نمایش همه"
 
-#: .\crm\templates\admin\pagination.html:11
-#: .\crm\templates\admin\submit_line.html:4
 msgid "Save"
 msgstr "ذخیره"
 
-#: .\crm\templates\admin\popup_response.html:3
 msgid "Popup closing…"
 msgstr "در حال بستن پنجره..."
 
-#: .\crm\templates\admin\search_form.html:7
 msgid "Search"
 msgstr "جستجو"
 
-#: .\crm\templates\admin\search_form.html:9
 #, python-format
 msgid "%(counter)s result"
 msgid_plural "%(counter)s results"
 msgstr[0] "%(counter)s نتیجه"
 msgstr[1] "%(counter)s نتیجه"
 
-#: .\crm\templates\admin\search_form.html:9
 #, python-format
 msgid "%(full_result_count)s total"
 msgstr "در مجموع %(full_result_count)s تا"
 
-#: .\crm\templates\admin\submit_line.html:5
 msgid "Save as new"
 msgstr "ذخیره به عنوان جدید"
 
-#: .\crm\templates\admin\submit_line.html:6
 msgid "Save and add another"
 msgstr "ذخیره و ایجاد یکی دیگر"
 
-#: .\crm\templates\admin\submit_line.html:7
 msgid "Save and continue editing"
 msgstr "ذخیره و ادامهٔ ویرایش"
 
-#: .\crm\templates\admin\submit_line.html:7
 msgid "Save and view"
 msgstr "ذخیره و نمایش"
 
-#: .\crm\templates\admin\submit_line.html:10
 msgid "Close"
 msgstr "بستن"
 
-#: .\crm\templates\admin\widgets\related_widget_wrapper.html:11
 #, python-format
 msgid "Change selected %(model)s"
 msgstr "تغییر دادن %(model)s انتخاب شده"
 
-#: .\crm\templates\admin\widgets\related_widget_wrapper.html:19
 #, python-format
 msgid "Add another %(model)s"
 msgstr "افزدون %(model)s دیگر"
 
-#: .\crm\templates\admin\widgets\related_widget_wrapper.html:27
 #, python-format
 msgid "Delete selected %(model)s"
 msgstr "حذف کردن %(model)s انتخاب شده"
 
-#: .\crm\templates\admin\widgets\related_widget_wrapper.html:34
 #, python-format
 msgid "View selected %(model)s"
 msgstr "نمایش %(model)sهای انتخاب شده"
 
-#: .\crm\templates\registration\logged_out.html:10
 msgid "Thanks for spending some quality time with the web site today."
 msgstr ""
 "از شما ممنون هستیم که زمان با ارزش خود را برای این تارنما امروز صرف کرده اید"
 
-#: .\crm\templates\registration\logged_out.html:12
 msgid "Log in again"
 msgstr "ورود دوباره"
 
-#: .\crm\templates\registration\password_change_done.html:14
-#: .\crm\templates\registration\password_change_form.html:17
 msgid "Password change"
 msgstr "تغییر گذرواژه"
 
-#: .\crm\templates\registration\password_change_done.html:19
 msgid "Your password was changed."
 msgstr "گذرواژهٔ شما تغییر یافت."
 
-#: .\crm\templates\registration\password_change_form.html:32
 msgid ""
 "Please enter your old password, for security’s sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
@@ -586,26 +419,18 @@ msgstr ""
 "برای امنیت بیشتر٬ لطفا گذرواژه قدیمی خود را وارد کنید٬ سپس گذرواژه جدیدتان "
 "را دوبار وارد کنید تا ما بتوانیم چک کنیم که به درستی تایپ کرده‌اید. "
 
-#: .\crm\templates\registration\password_change_form.html:60
-#: .\crm\templates\registration\password_reset_confirm.html:38
 msgid "Change my password"
 msgstr "تغییر گذرواژهٔ من"
 
-#: .\crm\templates\registration\password_reset_complete.html:7
-#: .\crm\templates\registration\password_reset_done.html:7
-#: .\crm\templates\registration\password_reset_form.html:9
 msgid "Password reset"
 msgstr "ایجاد گذرواژهٔ جدید"
 
-#: .\crm\templates\registration\password_reset_complete.html:13
 msgid "Your password has been set.  You may go ahead and log in now."
 msgstr "گذرواژهٔ جدیدتان تنظیم شد. اکنون می‌توانید وارد وب‌گاه شوید."
 
-#: .\crm\templates\registration\password_reset_confirm.html:9
 msgid "Password reset confirmation"
 msgstr "تأیید گذرواژهٔ جدید"
 
-#: .\crm\templates\registration\password_reset_confirm.html:17
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -613,15 +438,12 @@ msgstr ""
 "گذرواژهٔ جدیدتان را دوبار وارد کنید تا ما بتوانیم چک کنیم که به درستی تایپ "
 "کرده‌اید."
 
-#: .\crm\templates\registration\password_reset_confirm.html:25
 msgid "New password:"
 msgstr "گذرواژهٔ جدید:"
 
-#: .\crm\templates\registration\password_reset_confirm.html:32
 msgid "Confirm password:"
 msgstr "تکرار گذرواژه:"
 
-#: .\crm\templates\registration\password_reset_confirm.html:44
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
@@ -629,7 +451,6 @@ msgstr ""
 "پیوند ایجاد گذرواژهٔ جدید نامعتبر بود، احتمالاً به این علت که قبلاً از آن "
 "استفاده شده است. لطفاً برای یک گذرواژهٔ جدید درخواست دهید."
 
-#: .\crm\templates\registration\password_reset_done.html:13
 msgid ""
 "We’ve emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
@@ -637,7 +458,6 @@ msgstr ""
 "دستورالعمل تنظیم گذرواژه را برایتان ایمیل کردیم. اگر با ایمیلی که وارد کردید "
 "اکانتی وجود داشته باشد باید به زودی این دستورالعمل‌ها  را دریافت کنید."
 
-#: .\crm\templates\registration\password_reset_done.html:15
 msgid ""
 "If you don’t receive an email, please make sure you’ve entered the address "
 "you registered with, and check your spam folder."
@@ -645,7 +465,6 @@ msgstr ""
 "اگر ایمیلی دریافت نمی‌کنید، لطفاً بررسی کنید که آدرسی که وارد کرده‌اید همان است "
 "که با آن ثبت نام کرده‌اید، و پوشهٔ اسپم خود را نیز چک کنید."
 
-#: .\crm\templates\registration\password_reset_email.html:2
 #, python-format
 msgid ""
 "You're receiving this email because you requested a password reset for your "
@@ -654,26 +473,21 @@ msgstr ""
 "شما این ایمیل را بخاطر تقاضای تغییر رمز حساب در  %(site_name)s. دریافت کرده "
 "اید."
 
-#: .\crm\templates\registration\password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
 msgstr "لطفاً به صفحهٔ زیر بروید و یک گذرواژهٔ جدید انتخاب کنید:"
 
-#: .\crm\templates\registration\password_reset_email.html:8
 #, fuzzy
 #| msgid "Your username, in case you’ve forgotten:"
 msgid "In case you’ve forgotten, you are:"
 msgstr "نام کاربری‌تان، چنانچه احیاناً یادتان رفته است:"
 
-#: .\crm\templates\registration\password_reset_email.html:10
 msgid "Thanks for using our site!"
 msgstr "ممنون از استفادهٔ شما از وب‌گاه ما"
 
-#: .\crm\templates\registration\password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
 msgstr "گروه %(site_name)s"
 
-#: .\crm\templates\registration\password_reset_form.html:15
 msgid ""
 "Forgotten your password? Enter your email address below, and we’ll email "
 "instructions for setting a new one."
@@ -681,11 +495,9 @@ msgstr ""
 "گذرواژه خود را فراموش کرده اید؟ آدرس ایمیل خود را وارد کنید و ما مراحل تعیین "
 "کلمه عبور جدید را برای شما ایمیل می‌کنیم."
 
-#: .\crm\templates\registration\password_reset_form.html:22
 msgid "Email address:"
 msgstr "آدرس ایمیل:"
 
-#: .\crm\templates\registration\password_reset_form.html:28
 msgid "Reset my password"
 msgstr "ایجاد گذرواژهٔ جدید"
 

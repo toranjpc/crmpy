@@ -1,8 +1,13 @@
 {% extends "dashboard/main.html" %}
-{% block title %}_('پنل مدیریت'){% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans 'dashboard' %}{% endblock %}
 
 {% block content %}
 
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+{{ LANGUAGE_CODE }}
 
 
 {% endblock %}

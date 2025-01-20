@@ -124,16 +124,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 LANGUAGES = [
-    ('fa', 'فارسی'),
+    ('fa', 'Persian'),
     ('en', 'English'),
     # سایر زبان‌ها
 ]
 LOCALE_PATHS = [
     SETTING_DIR / 'locale',
 ]
-
 LANGUAGE_CODE = 'fa'
-# TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Tehran'
 USE_I18N = True
 USE_L10N = True

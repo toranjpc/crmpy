@@ -2,6 +2,21 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import User
 
+from django.utils import translation
+
+
+# dashboard Start
+def dashboard(request):
+    
+    # translation.activate('fa')
+    # request.LANGUAGE_CODE = 'fa'
+    
+    users = User.objects.all()
+    return render(request, 'dashboard/dashboard.html', {'datas': {'users':users}})
+
+# Userse End
+
+
 
 
 # Userse Start

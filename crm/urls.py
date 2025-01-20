@@ -20,6 +20,9 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     
+    path('change-lang/', include('django.conf.urls.i18n')),  
+
+
     path("dashboard/", include("myapp.urls")),
 
 ]
