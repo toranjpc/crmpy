@@ -1,6 +1,3 @@
-$(".sidebar-menu a[href='" + window.location.href + "']").not('.baseUrl').addClass('active').closest("ul").addClass("open");
-
-
 const sidebar = document.getElementById('sidebar');
 const navbar = document.getElementById('navbar');
 const mainContent = document.getElementById('mainContent');

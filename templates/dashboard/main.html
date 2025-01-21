@@ -34,7 +34,7 @@
   <div class="sidebar collapsed0" id="sidebar">
     <ul class="sidebar-menu">
       <li>
-        <a class="baseUrl" href="{% url 'dashboard' %}">
+        <a class="" href="{% url 'dashboard' %}">
           <i class="fas fa-home"></i>
           <span class="link-text">{% trans 'dashboard' %}</span>
         </a>
@@ -42,19 +42,19 @@
       <li>
         <a class="baseUrl" href="javascript:;">
           <i class="fas fa-users"></i>
-          <span class="link-text">کاربران</span>
+          <span class="link-text">{% trans 'users' %}</span>
         </a>
         <ul class="submenu">
           <li>
-            <a href="users">لیست کاربران</a>
+            <a href="{% url 'Users_list' %}">{% trans 'Show all' %}</a>
           </li>
           <li>
-            <a href="add-user">افزودن کاربر</a>
+            <a href="{% url 'User_Add' %}">{% trans 'Add' %}</a>
           </li>
         </ul>
       </li>
       <li>
-        <a class="baseUrl" href="static/simpleAdmin">
+        <a class="" href="static/simpleAdmin">
           <i class="fas fa-chart-line"></i>
           <span class="link-text">آمار</span>
         </a>
@@ -135,24 +135,30 @@
       {% csrf_token %}
       <input name="next" type="hidden" value="{{ request.path }}">
       <select name="language" onchange="this.form.submit()">
-          <option value="fa">فارسی</option>
-          <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+        <option value="fa" >فارسی</option>
+        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
       </select>
-  </form>
+    </form>
+
     <!-- <a class="navbar-brand float-left" href="#">پنل مدیریت</a> -->
     <!-- </div> -->
   </nav>
 
   <!-- محتوای اصلی -->
   <div class="main-content expanded0" id="mainContent">
-    {% block content %}
 
+
+    {% block content %}
     {% endblock %}
   </div>
 
   <!-- Bootstrap 5 JS -->
   <script src="/static/simpleAdmin/js/bootstrap.bundle.min.js"></script>
   <script src="/static/simpleAdmin/js/popper.min.js"></script>
+
+  <script>
+    $(".sidebar-menu a[href='{{ request.path }}']").not('.baseUrl').addClass('active').closest("ul.submenu").addClass("open");
+  </script>
   <script src="/static/simpleAdmin/js/main.js"></script>
   <!-- Custom JS -->
   {% block extJs %}

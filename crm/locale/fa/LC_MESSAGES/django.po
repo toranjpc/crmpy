@@ -74,7 +74,7 @@ msgid "Change or view list link"
 msgstr ""
 
 msgid "Add"
-msgstr "اضافه کردن"
+msgstr "افزودن"
 
 msgid "View"
 msgstr "مشاهده"

@@ -25,19 +25,23 @@ def Users_list(request):
     return render(request, 'dashboard/User_List.html', {'users': users})
 
 
-def Users_View(request, id):
+def User_Add(request):
+    users = User.objects.all()
+    return render(request, 'dashboard/User_List.html', {'users': users})
+
+def User_View(request, id):
     return HttpResponse(id)
 
 
-def Users_Copy(request, id):
-    return true
+def User_Copy(request, id):
+    return HttpResponse(id)
 
 
-def Users_Edit(request, id):
-    return true
+def User_Edit(request, id):
+    return HttpResponse(id)
 
 
-def Users_Destroy(request, id):
-    return true
+def User_Destroy(request, id):
+    return HttpResponse(id)
 
 # Userse End

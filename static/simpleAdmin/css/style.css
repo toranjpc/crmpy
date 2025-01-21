@@ -42,15 +42,12 @@ body {
 }
 
 .sidebar-menu li {
-    padding: 10px 15px;
+    padding: 0px 5px 0px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.sidebar-menu li a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+.sidebar-menu li:last-child {
+    border-bottom: none;
 }
 
 .sidebar-menu li a i {
@@ -59,9 +56,34 @@ body {
 
 /* لینک فعال */
 .sidebar-menu li a.active {
-    color: var(--secondary-color);
-    font-weight: bold;
+    color: #343a40;
+    background-color: #f8f9fa;
+    --r: 20px;
+    padding-inline: 10px;
+    border-block: var(--r) solid #0000;
+    border-radius: 0 var(--r) var(--r) 0 / calc(2* var(--r));
+    mask: radial-gradient(var(--r) at 100% var(--r), #0000 98%, #000 101%) 0 calc(-1* var(--r)) / var(--r) 100% repeat-y, conic-gradient(#000 0 0) padding-box;
 }
+
+/* .sidebar-menu li a.active::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background-color: #f8f9fa;
+    width: 5px;
+    height: 10px;
+}
+
+.sidebar-menu li a.active::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background-color: #f8f9fa;
+    width: 5px;
+    height: 10px;
+} */
 
 /* زیرمنوها */
 .submenu {
@@ -78,11 +100,13 @@ body {
     padding: 8px 0;
 }
 
-.submenu li a {
+.sidebar-menu li a {
     color: white;
     text-decoration: none;
     display: flex;
     align-items: center;
+    padding: 10px 5px;
+    font-weight: bolder;
 }
 
 .submenu li a i {
@@ -176,6 +200,10 @@ body {
     animation: spin 1s linear infinite;
 }
 
+
+
+
+
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -211,7 +239,7 @@ body {
 }
 
 .dropdown-toggle.arrow-0::after {
-    display: none;
+    display: non;
 }
 
 
