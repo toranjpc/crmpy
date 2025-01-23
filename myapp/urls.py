@@ -2,6 +2,7 @@
 # from django.contrib import admin
 from django.urls import path, include
 from . import views
+from .user_auth_views import login_view, logout_view
 
 User_patterns = [
     path("", views.Users_list, name='Users_list'),
@@ -13,7 +14,11 @@ User_patterns = [
 ]
 
 urlpatterns = [
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+
     path("", views.dashboard, name='dashboard'),
     
     path("user/", include(User_patterns)),
 ]
+

@@ -17,6 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SETTING_DIR = Path(__file__).resolve().parent
 
 
+LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'admin_dashboard'
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 

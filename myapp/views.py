@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import User
+from django.contrib.auth.decorators import login_required
 
 from django.utils import translation
 
 
 # dashboard Start
+@login_required
 def dashboard(request):
     
     # translation.activate('fa')
