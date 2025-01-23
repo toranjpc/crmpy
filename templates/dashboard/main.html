@@ -161,11 +161,21 @@
   <!-- Bootstrap 5 JS -->
   <script src="/static/simpleAdmin/js/bootstrap.bundle.min.js"></script>
   <script src="/static/simpleAdmin/js/popper.min.js"></script>
+  <script src="/static/simpleAdmin/js/main.js"></script>
 
   <script>
+    function checkWidth() {
+      if ($(window).width() <= 768) { 
+$("#toggleMenu").click();
+      }
+  }
+  checkWidth();
+  $(window).resize(function() {
+      checkWidth();
+  });
+
     $(".sidebar-menu a[href='{{ request.path }}']").not('.baseUrl').addClass('active').closest("ul.submenu").addClass("open");
   </script>
-  <script src="/static/simpleAdmin/js/main.js"></script>
   <!-- Custom JS -->
   {% block extJs %}
 
