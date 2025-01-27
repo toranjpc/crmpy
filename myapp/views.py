@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import User, UserOption
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+# from django.views.decorators.csrf import csrf_exempt
 
 from django.utils import translation
 from django.db.models import Q
@@ -35,6 +35,7 @@ def dashboard(request):
 # Userse Start
 
 # User Category Start
+@login_required
 def User_Category_list(request):
     filters = Q()
     if request.GET.get('id'):
@@ -49,7 +50,7 @@ def User_Category_list(request):
         filters |= Q(title__icontains=name)
 
     filters &= Q(kind='UserKind')
-    fields = ['id', 'title','created_at']
+    fields = ['id', 'title','option','status','created_at']
     queryset=UserOption.objects.values(*fields).filter(filters)
 
     page = request.GET.get('page', 1)
@@ -64,11 +65,12 @@ def User_Category_list(request):
     return render(request, 'dashboard/User_Kind_List.html', {'UserOptions': UserOptions,'request':request})
 
 
-@csrf_exempt
+# @csrf_exempt
+@login_required
 def User_Category_Add(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        option = request.POST.get('option')
+        option = {'form':request.POST.get('option')}
         kind = 'UserKind'
         status = request.POST.get('status', 0)
         
@@ -85,14 +87,41 @@ def User_Category_Add(request):
         messages.success(request, 'کاربر با موفقیت ثبت شد.')
         return redirect('User_Kind_list')
 
-
+@login_required
 def User_Category_Edit(request, id):
-    return HttpResponse(id)
+    user_option = get_object_or_404(UserOption, id=id)
+    
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        option = {'form': request.POST.get('option')}
+        # kind = 'UserKind'
+        status = request.POST.get('status', 0)
+        
+        if not title:
+            messages.error(request, 'خطا!!! لطفا فیلد های مورد نیاز را تکمیل نمایید')
+            return redirect('User_Kind_list')
+
+        if not status:
+            status = 0
+        
+        user_option.title = title
+        user_option.option = option
+        # user_option.kind = kind
+        user_option.status = status
+        user_option.save()
+        
+        messages.success(request, 'کاربر با موفقیت ویرایش شد.')
+        return redirect('User_Kind_list')
 
 
+
+@login_required
 def User_Category_Destroy(request, id):
+    count=0
+
     filters = Q(kind=id)
-    count = User.objects.filter(filters).count()
+    count += User.objects.filter(filters).count()
+
     if count == 0:
         filters = Q(id=id)
         UserOption.objects.filter(filters).delete()
@@ -107,6 +136,7 @@ def User_Category_Destroy(request, id):
 
 
 # User Category End
+@login_required
 def Users_list(request):
     filters = Q()
     if request.GET.get('id'):
@@ -151,6 +181,7 @@ def Users_list(request):
     return render(request, 'dashboard/User_List.html', {'users': users, 'UserOptions':UserOptions, 'request':request})
 
 
+@login_required
 def User_Add(request):
     UOfilters = Q(kind='UserKind')
     UOfields = ['id', 'title']
@@ -158,17 +189,21 @@ def User_Add(request):
     
     return render(request, 'dashboard/User_Kind_List.html', {'UserOptions':UserOptions, 'pageTitle':'user add'})
 
+@login_required
 def User_View(request, id):
     return HttpResponse(id)
 
+@login_required
 def User_Copy(request, id):
     return HttpResponse(id)
 
 
+@login_required
 def User_Edit(request, id):
     return HttpResponse(id)
 
 
+@login_required
 def User_Destroy(request, id):
     return HttpResponse(id)
 

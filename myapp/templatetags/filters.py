@@ -1,4 +1,5 @@
 import jdatetime
+import json
 from django import template
 import datetime
 
@@ -31,3 +32,8 @@ def to_jalali(gregorian_date):
             jalali_date = jdatetime.date.fromgregorian(date=gregorian_date)
             return jalali_date.strftime('%Y/%m/%d 00:00')
     return ''
+
+
+@register.filter(name='jsonify')
+def jsonify(object):
+    return json.dumps(object, ensure_ascii=False)

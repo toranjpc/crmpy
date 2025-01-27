@@ -58,3 +58,17 @@ document.addEventListener('touchend', () => {
         mainContent.classList.add('expanded');
     }
 });
+
+
+$(document).on("change", ".checkboxLable input[type='checkbox']", function () {
+    if ($(this).is(":checked")) {
+        $(this).next('i')
+            .addClass('fa-check').removeClass('fa-times')
+            .closest('label').addClass('bg-info').removeClass('bg-secondary')
+    }
+    else {
+        $(this).next('i')
+            .removeClass('fa-check').addClass('fa-times')
+            .closest('label').removeClass('bg-info').addClass('bg-secondary')
+    }
+})

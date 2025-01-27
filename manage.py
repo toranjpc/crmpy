@@ -20,3 +20,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# pip freeze > requirements.txt
+# pip install -r requirements.txt

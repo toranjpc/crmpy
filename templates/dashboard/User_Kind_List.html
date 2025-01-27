@@ -1,177 +1,267 @@
-{% extends "dashboard/main.html" %}
+{% extends 'dashboard/main.html' %}
 {% load i18n %}
 {% load filters %}
 
-{% block title %} {% trans 'user kinds' %} {% endblock %}
+{% block title %}
+  {% trans 'user kinds' %}
+{% endblock %}
 
 {% block content %}
-
-<div class="row">
-
-
+  <div class="row">
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">{% trans 'user kinds' %}</h5>
-                <div>
-                    <button class="btn btn-primary" id="toggleSearchBtn">
-                        <span class="d-none d-md-inline">جست و جو &nbsp;</span>
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="searchFields"
-                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
-                    <form action="">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <input type="text" name="id" value="{{request.GET.id}}" class="form-control"
-                                    placeholder="شناسه">
-                            </div>
-                            <div class="col">
-                                <input type="text" name="name" value="{{request.GET.name}}" class="form-control"
-                                    placeholder="عنوان">
-                            </div>
-                            <div class="col-4">
-                                <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
-                                <a class="btn btn-danger" href="./"><i class="fa fa-times"></i></a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- اضافه کردن قابلیت اسکرول افقی به جدول -->
-                <div class="table-responsive">
-                    <table class="table table-striped w-100">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>عنوان</th>
-                                <th>تاریخ ایجاد</th>
-                                <th>عملیات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody">
-                            {% for UserOption in UserOptions %}
-                            <tr data-id="{{ UserOption.id }}">
-                                <td>{{ UserOption.id }}</td>
-                                <td>{{ UserOption.title }}</td>
-                                <td>{{ UserOption.created_at|to_jalali }}</td>
-                                <td>
-                                    <button class="btn btn-sm text-warning border-warning edit" type="button"><i
-                                            class="fa fa-cog"></i></button>
-
-                                    <a href="{% url 'User_Kind_Destroy' UserOption.id %}"
-                                        onclick="return confirm('آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟');"
-                                        class="btn btn-sm text-danger border-danger delete" type="button">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination pagination-sm">
-                        {% if UserOptions.has_previous %}
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo;
-                                اولین</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="?page={{ UserOptions.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">قبلی</a>
-                        </li>
-                        {% endif %}
-                        <li class="page-item disabled">
-                            <span class="page-link">
-                                صفحه
-                                {{ UserOptions.number }}
-                                از
-                                {{ UserOptions.paginator.num_pages}}
-                            </span>
-                        </li>
-                        {% if UserOptions.has_next %}
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="?page={{ UserOptions.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">بعدی</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link"
-                                href="?page={{ UserOptions.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">آخرین
-                                &raquo;</a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">{% trans 'user kinds' %}</h5>
+          <div>
+            <button class="btn btn-sm btn-primary" id="toggleSearchBtn">
+              <span class="d-none d-md-inline">جست و جو &nbsp;</span>
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
+        <div class="card-body">
+          <div id="searchFields" class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+            <form action="">
+              <div class="row mb-3">
+                <div class="col">
+                  <input type="text" name="id" value="{{ request.GET.id }}" class="form-control" placeholder="شناسه" />
+                </div>
+                <div class="col">
+                  <input type="text" name="name" value="{{ request.GET.name }}" class="form-control" placeholder="عنوان" />
+                </div>
+                <div class="col-4">
+                  <button class="btn btn-sm btn-info" type="submit"><i class="fa fa-search"></i></button>
+                  <a class="btn btn-sm btn-danger" href="./"><i class="fa fa-times"></i></a>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- اضافه کردن قابلیت اسکرول افقی به جدول -->
+          <div class="table-responsive">
+            <script>
+              var UserOptions = {}
+            </script>
+            <table class="table table-striped w-100">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>عنوان</th>
+                  <th>تاریخ ایجاد</th>
+                  <th>عملیات</th>
+                </tr>
+              </thead>
+              <tbody id="userTableBody">
+                {% for UserOption in UserOptions %}
+                  <tr data-id="{{ UserOption.id }}" data-status="{{ UserOption.status }}" data-json='{{ UserOption.option|jsonify }}'>
+                    <td>{{ UserOption.id }}</td>
+                    <td data-title>{{ UserOption.title }}</td>
+                    <td>{{ UserOption.created_at|to_jalali }}</td>
+                    <td>
+                      <button class="btn btn-sm text-warning border-warning edit" type="button"><i class="fa fa-cog"></i></button>
+                      <a href="{% url 'User_Kind_Destroy' UserOption.id %}" onclick="return confirm('آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟');" class="btn btn-sm text-danger border-danger delete" type="button"><i class="fa fa-trash"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <nav aria-label="Page navigation">
+            <ul class="pagination pagination-sm">
+              {% if UserOptions.has_previous %}
+                <li class="page-item">
+                  <a class="page-link"
+                    href="?page=1{% for key, value in request.GET.items %}
+                      {% if key != 'page' %}
+                        
+                        &{{ key }}={{ value }}
+                      {% endif %}
+                    {% endfor %}">
+                    &laquo; اولین
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link"
+                    href="?page={{ UserOptions.previous_page_number }}{% for key, value in request.GET.items %}
+                      {% if key != 'page' %}
+                        
+                        &{{ key }}={{ value }}
+                      {% endif %}
+                    {% endfor %}">
+                    قبلی
+                  </a>
+                </li>
+              {% endif %}
+              <li class="page-item disabled">
+                <span class="page-link">صفحه {{ UserOptions.number }} از {{ UserOptions.paginator.num_pages }}</span>
+              </li>
+              {% if UserOptions.has_next %}
+                <li class="page-item">
+                  <a class="page-link"
+                    href="?page={{ UserOptions.next_page_number }}{% for key, value in request.GET.items %}
+                      {% if key != 'page' %}
+                        
+                        &{{ key }}={{ value }}
+                      {% endif %}
+                    {% endfor %}">
+                    بعدی
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link"
+                    href="?page={{ UserOptions.paginator.num_pages }}{% for key, value in request.GET.items %}
+                      {% if key != 'page' %}
+                        
+                        &{{ key }}={{ value }}
+                      {% endif %}
+                    {% endfor %}">
+                    آخرین &raquo;
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-4">
-        <form action="{% url 'User_Kind_Add' %}" method="post">
-            {% csrf_token %}
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">{% trans 'Add' %}</h5>
-                    <div>
-                        <button type="submit" class="btn btn-success">
-                            <span class="d-none d-md-inline">ذخیره &nbsp;</span>
-                            <i class="fa fa-save"></i>
-                        </button>
-                        <a href="./" class="btn btn-danger">
-                            <span class="d-none d-md-inline">ریست لیست &nbsp;</span>
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="btn btn-sm text-{{ message.tags }}">{{ message }}</div>
-                    {% endfor %}
-                    {% endif %}
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label for="title">عنوان:</label>
-                                <input type="text" class="form-control" id="title" name="title" maxlength="255">
-                            </div>
-                            <div class="col-4 col-md-2">
-                                <label for="status">فعال:</label>
-                                <label class="btn bg-info border">
-                                    <input type="checkbox" id="status" value="1" name="status" checked hidden
-                                        onchange="$(this).next('i').toggleClass('fa-times fa-check').closest('label').toggleClass('bg-info bg-danger')">
-                                    <i class="fa fa-check"></i>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="option">گزینه:</label>
-                        <textarea class="form-control" id="option" name="option"></textarea>
-                    </div>
-
-                </div>
+      <form action="{% url 'User_Kind_Add' %}" method="post" id="dataForm">
+        {% csrf_token %}
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{% trans 'Add' %}</h5>
+            <div>
+              <button type="submit" class="btn btn-sm btn-success">
+                <span class="d-none d-md-inline">ذخیره &nbsp;</span>
+                <i class="fa fa-save"></i>
+              </button>
+              <a href="./" class="btn btn-sm btn-danger">
+                <span class="d-none d-md-inline">پاکسازی فرم &nbsp;</span>
+                <i class="fa fa-times"></i>
+              </a>
             </div>
-        </form>
+          </div>
+          <div class="card-body">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="btn btn-sm text-{{ message.tags }}">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <label for="title">عنوان:</label>
+                  <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                </div>
+                <div class="col-4 col-md-2">
+                  <label for="status">فعال:</label>
+                  <label class="btn bg-info border checkboxLable">
+                    <input type="checkbox" id="status" value="1" name="status" checked hidden />
+                    <i class="fa fa-check"></i>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="option">گزینه:</label>
+              <textarea class="form-control" id="option" name="option"></textarea>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-
-
-
-</div>
-
-
+  </div>
 {% endblock %}
 
 {% block extJs %}
-<script>
+  <link href="/static/simpleAdmin/assets/ui/jquery-ui.min.css" rel="stylesheet" />
+  <script src="/static/simpleAdmin/assets/ui/jquery-ui.custom.min.js"></script>
+  <script src="/static/simpleAdmin/assets/ui/jquery-ui.touch.min.js"></script>
+  <script src="/static/simpleAdmin/assets/form_bilder/form-builder.min.js?v=3.4.2"></script>
+
+  <script>
     $(document).ready(function () {
+
+    var formmakeroption = {
+        // disableFields: ['text', 'select', 'checkbox-group', 'radio-group', 'button', 'textarea', 'header', 'paragraph',],
+        disableFields: ['number', 'file', 'hidden', 'autocomplete', 'date'],
+        typeUserAttrs: {
+            text: {
+                DataMask: {
+                    label: 'فرمت',
+                    type: 'text',
+                    placeholder: '999/99/99',
+                    value: '',
+                }
+            }
+        },
+        i18n: {
+            locale: 'fa-IR'
+        },
+        disabledActionButtons: ['data', 'save', 'clear'],
+        onAddField: function(x, element) {
+            setTimeout(() => {
+                // $("form#dataform").find('textarea[name=ext]').val(form.formData);
+            }, 1000);
+        },
+    };
+    var form;
+    $(document).on("click", "textarea[name='option']", function(e) {
+        var dis = $(this)
+        var val = $(this).val();
+        $.confirm({
+            title: false,
+            content: function() {
+                form = this.$content.addClass('text-right').formBuilder(formmakeroption);
+            },
+            type: 'green',
+            columnClass: 'xlarge',
+            backgroundDismiss: true,
+            backgroundDismissAnimation: 'glow',
+            theme: 'Modern',
+            icon: 'icon-trash',
+            animation: 'scale',
+            onContentReady: function() {
+                var self = this;
+                form.actions.setData(val);
+            },
+            buttons: {
+                ok: {
+                    text: 'ثبت تغییرات',
+                    btnClass: 'btn-danger',
+                    keys: ['enter'],
+                    action: function() {
+                        var self = this;
+                        dis.val(form.formData);
+                    }
+                },
+                cancel: {
+                    text: 'انصراف',
+                    keys: ['esc'],
+                    action: function() {}
+                }
+            }
+        });
+
+    });
+
+
+    
+        $('table tbody .edit').click(function () {
+            var tr=$(this).closest("tr")
+            var id=tr.data("id")
+            var form=tr.data("json")
+            var status=tr.data("status")
+            var title=tr.find("[data-title]").text()
+            $("textarea[name='option']").val(form['form'])
+            $("input[name='title']").val(title)
+            $("form#dataForm").prop("action","{% url 'User_Kind_Edit' 999 %}".replace(999,id))
+            $("input[name='status']").prop("checked",false).change()
+            if(status=='1') $("input[name='status']").prop("checked",true).change()
+        })
         $('#toggleSearchBtn').click(function () {
             $('#searchFields').toggleClass("d-none");
         });
