@@ -1,0 +1,114 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ثبت‌نام</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="/static/simpleAdmin/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- FontAwesome برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IRANSans&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
+
+  <style>
+    .login,
+    .image {
+      min-height: 100vh;
+    }
+
+    .bg-image {
+      background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+      background-size: cover;
+      background-position: center center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col-md-4 bg-light">
+        <div class="login d-flex align-items-center py-5">
+          <!-- Demo content -->
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-10 col-xl-8 mx-auto">
+                <h3 class="display-4">{% trans 'Sign Up' %}</h3>
+                <p class="text-muted mb-4">{% trans 'Create an account to get started' %}</p>
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                  {% for message in messages %}
+                  {{ message }}
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <!-- فیلد نام -->
+                  <div class="form-group mb-3">
+                    <input id="inputFirstName" type="text" name="first_name" placeholder="{% trans 'name' %}" required
+                      class="form-control rounded-pill border-0 shadow-sm px-4">
+                    {% for error in form.first_name.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <!-- فیلد نام خانوادگی -->
+                  <div class="form-group mb-3">
+                    <input id="inputLastName" type="text" name="last_name" placeholder="{% trans 'last name' %}"
+                      required class="form-control rounded-pill border-0 shadow-sm px-4">
+                    {% for error in form.last_name.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <!-- فیلد نام کاربری یا شماره موبایل -->
+                  <div class="form-group mb-3">
+                    <input id="inputUsername" type="text" name="username"
+                      placeholder="{% trans 'username' %} / {% trans 'phone number' %}" required autofocus
+                      class="form-control rounded-pill border-0 shadow-sm px-4"
+                      value="{{ form.username.value|default:'' }}">
+                    {% for error in form.username.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <!-- فیلد رمز عبور -->
+                  <div class="form-group mb-3">
+                    <input id="inputPassword1" type="password" name="password1" placeholder="{% trans 'Password' %}"
+                      required class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                    {% for error in form.password1.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <!-- فیلد تأیید رمز عبور -->
+                  <div class="form-group mb-3">
+                    <input id="inputPassword2" type="password" name="password2"
+                      placeholder="{% trans 'Confirm Password' %}" required
+                      class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                    {% for error in form.password2.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <!-- دکمه ثبت‌نام -->
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">{% trans 'Sign Up' %}</button>
+                  <!-- لینک ورود -->
+                  <p>
+                    {% trans 'You have already registered' %} ؟
+                    <a href="{% url 'login' %}" class="">{% trans 'Sign In' %}</a>
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- End -->
+        </div>
+      </div>
+
+      <div class="col d-none d-md-flex bg-image"></div>
+    </div>
+  </div>
+</body>
+
+</html>

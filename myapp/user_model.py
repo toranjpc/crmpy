@@ -21,7 +21,7 @@ class User(AbstractUser):
     mobile_verified_at = models.DateTimeField(blank=True, null=True)
     email = models.EmailField(max_length=191, unique=True, blank=True, null=True)  
     email_verified_at = models.DateTimeField(blank=True, null=True)
-    job = models.IntegerField(default=0)
+    kind = models.IntegerField(default=0)
     per = models.JSONField(blank=True, null=True)
     des = models.JSONField(blank=True, null=True)
     # status = models.SmallIntegerField(default=1)
@@ -45,6 +45,7 @@ class UserOption(models.Model):
 
     KIND_CHOICES = [
         ('UserExtData', _('UserExtData')), 
+        ('UserKind', _('UserKind')), 
     ]
     kind = models.CharField(choices=KIND_CHOICES, max_length=255, null=True, blank=True)
 

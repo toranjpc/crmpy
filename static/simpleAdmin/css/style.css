@@ -43,11 +43,11 @@ body {
 
 .sidebar-menu li {
     padding: 0px 5px 0px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 .sidebar-menu li:last-child {
-    border-bottom: none;
+    /* border-bottom: none; */
 }
 
 .sidebar-menu li a i {
@@ -148,13 +148,16 @@ body {
 
 /* محتوای اصلی */
 .main-content {
-    margin-right: 180px;
+    /* margin-right: 180px; */
     padding: 70px 20px 20px;
     transition: margin-right 0.3s ease;
+    width: calc(100% - 180px);
+    float: left;
 }
 
 .main-content.expanded {
-    margin-right: 0px;
+    /* margin-right: 0px; */
+    width: calc(100% - 50px);
 }
 
 /* دکمه جمع‌شدن منو */
@@ -218,7 +221,13 @@ body {
 
 
 /* صفحه‌نمایش‌های کوچک (موبایل) - عرض کمتر از 768px */
-@media (max-width: 767px) {}
+@media (max-width: 767px) {
+
+    .main-content.expanded,
+    .main-content {
+        width: 100%;
+    }
+}
 
 /* صفحه‌نمایش‌های متوسط (تبلت) - عرض بین 768px تا 991px */
 @media (min-width: 768px) {

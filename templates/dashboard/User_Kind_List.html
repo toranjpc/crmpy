@@ -1,0 +1,152 @@
+{% extends "dashboard/main.html" %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %} {% trans 'user kinds' %} {% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">{% trans 'user kinds' %}</h5>
+                <div>
+                    <button class="btn btn-primary" id="toggleSearchBtn">
+                        <span class="d-none d-md-inline">جست و جو &nbsp;</span>
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="searchFields"
+                    class="{% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+                    <form action="">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <input type="text" name="id" value="{{request.GET.id}}" class="form-control"
+                                    placeholder="شناسه">
+                            </div>
+                            <div class="col">
+                                <input type="text" name="name" value="{{request.GET.name}}" class="form-control"
+                                    placeholder="عنوان">
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+                                <a class="btn btn-danger" href="./"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- اضافه کردن قابلیت اسکرول افقی به جدول -->
+                <div class="table-responsive">
+                    <table class="table table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>عنوان</th>
+                                <th>تاریخ ایجاد</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            {% for UserOption in UserOptions %}
+                            <tr data-id="{{ UserOption.id }}">
+                                <td>{{ UserOption.id }}</td>
+                                <td>{{ UserOption.title }}</td>
+                                <td>{{ UserOption.created_at|to_jalali }}</td>
+                                <td>
+                                    <button class="btn btn-sm text-warning border-warning edit" type="button"><i
+                                            class="fa fa-cog"></i></button>
+                                    <button class="btn btn-sm text-danger border-danger delete" type="button"><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm">
+                        {% if UserOptions.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo;
+                                اولین</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ UserOptions.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">قبلی</a>
+                        </li>
+                        {% endif %}
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                صفحه
+                                {{ UserOptions.number }}
+                                از
+                                {{ UserOptions.paginator.num_pages}}
+                            </span>
+                        </li>
+                        {% if UserOptions.has_next %}
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ UserOptions.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">بعدی</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link"
+                                href="?page={{ UserOptions.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">آخرین
+                                &raquo;</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <form action="">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{% trans 'Add' %}</h5>
+                    <div>
+                        <button class="btn btn-success">
+                            <span class="d-none d-md-inline">ذخیره &nbsp;</span>
+                            <i class="fa fa-save"></i>
+                        </button>
+                        <a href="./" target="blank" class="btn btn-danger">
+                            <span class="d-none d-md-inline">ریست لیست &nbsp;</span>
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+{% block extJs %}
+<script>
+    $(document).ready(function () {
+        $('#toggleSearchBtn').click(function () {
+            $('#searchFields').toggleClass("d-none");
+        });
+
+        $("select[name='userKind'] option[value='{{request.GET.userKind}}']").prop("selected", true)
+    });
+</script>
+{% endblock %}

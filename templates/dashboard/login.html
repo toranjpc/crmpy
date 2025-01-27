@@ -1,81 +1,91 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ورود</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="/static/simpleAdmin/css/bootstrap.min.css" rel="stylesheet" />
-    <!-- FontAwesome برای آیکون‌ها -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=IRANSans&display=swap" rel="stylesheet" />
-    <!-- Custom CSS -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {% comment %} <script src="/static/simpleAdmin/js/jquery-3.7.1.min.js"></script> {% endcomment %}
+  <title>ورود</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="/static/simpleAdmin/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- FontAwesome برای آیکون‌ها -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IRANSans&display=swap" rel="stylesheet" />
+  <!-- Custom CSS -->
 
-    <style>
-      .login,
-      .image {
-        min-height: 100vh;
-      }
-      
-      .bg-image {
-        background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
-        background-size: cover;
-        background-position: center center;
-      }
-    </style>
-  </head>
+  {% comment %}
+  <script src="/static/simpleAdmin/js/jquery-3.7.1.min.js"></script> {% endcomment %}
 
-  <body>
-    <div class="container-fluid">
-      <div class="row no-gutter">
-        <div class="col-md-4 bg-light">
-          <div class="login d-flex align-items-center py-5">
-            <!-- Demo content -->
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-10 col-xl-8 mx-auto">
-                  <h3 class="display-4">{% trans 'Log in' %}</h3>
-                  <p class="text-muted mb-4">{% trans 'You must have an account to use this section' %}</p>
-                  {% if messages %}
-                      <div class="alert alert-danger" role="alert">
-                          {% for message in messages %}
-                              {{ message }}
-                          {% endfor %}
-                      </div>
-                  {% endif %}
-                  <form method="POST">
-                    {% csrf_token %}
-                    <div class="form-group mb-3">
-                      <input id="inputEmail" type="text" name="username" placeholder="{% trans 'username' %}" required autofocus class="form-control rounded-pill border-0 shadow-sm px-4" value="{{ form.username.value|default:'' }}">
-                      {% for error in form.username.errors %}
-                        <div class="text-danger">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-                    <div class="form-group mb-3">
-                      <input id="inputPassword" type="password" name="password" placeholder="{% trans 'Password' %}" required class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
-                      {% for error in form.password.errors %}
-                        <div class="text-danger">{{ error }}</div>
-                      {% endfor %}
-                    </div>
-                    <div class="custom-control custom-checkbox mb-3">
-                      <input id="customCheck1" type="checkbox" name="remember_me" class="custom-control-input" {% if form.remember_me.value %}checked{% endif %}>
-                      <label for="customCheck1" class="custom-control-label">{% trans 'Remember password' %}</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">{% trans 'Sign in' %}</button>
-                  </form>
+  <style>
+    .login,
+    .image {
+      min-height: 100vh;
+    }
+
+    .bg-image {
+      background-image: url('https://res.cloudinary.com/mhmd/image/upload/v1555917661/art-colorful-contemporary-2047905_dxtao7.jpg');
+      background-size: cover;
+      background-position: center center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col-md-4 bg-light">
+        <div class="login d-flex align-items-center py-5">
+          <!-- Demo content -->
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-10 col-xl-8 mx-auto">
+                <h3 class="display-4">{% trans 'Log in' %}</h3>
+                <p class="text-muted mb-4">{% trans 'You must have an account to use this section' %}</p>
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                  {% for message in messages %}
+                  {{ message }}
+                  {% endfor %}
                 </div>
+                {% endif %}
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group mb-3">
+                    <input id="inputEmail" type="text" name="username" placeholder="{% trans 'username' %}/{% trans 'phone number' %}" required
+                      autofocus class="form-control rounded-pill border-0 shadow-sm px-4"
+                      value="{{ form.username.value|default:'' }}">
+                    {% for error in form.username.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <div class="form-group mb-3">
+                    <input id="inputPassword" type="password" name="password" placeholder="{% trans 'Password' %}"
+                      required class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                    {% for error in form.password.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+                  <div class="custom-control custom-checkbox mb-3">
+                    <input id="customCheck1" type="checkbox" name="remember_me" class="custom-control-input" >
+                    <label for="customCheck1" class="custom-control-label">{% trans 'Remember password' %}</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">{% trans 'Sign in' %}</button>
+                  <p>
+                    {% trans 'You do not have an account' %}   ؟
+                    <a href="{% url 'signup' %}" class="">{% trans 'Sign Up' %}</a>
+                  </p>
+                </form>
               </div>
             </div>
-            <!-- End -->
           </div>
+          <!-- End -->
         </div>
-
-        <div class="col d-none d-md-flex bg-image"></div>
       </div>
+
+      <div class="col d-none d-md-flex bg-image"></div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

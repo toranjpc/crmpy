@@ -48,7 +48,7 @@ document.addEventListener('touchmove', (event) => {
 document.addEventListener('touchend', () => {
     const swipeDistance = touchEndX - touchStartX;
 
-    if (swipeDistance < -swipeThreshold && sidebar.classList.contains('collapsed')) {
+    if (swipeDistance < -swipeThreshold && sidebar.classList.contains('collapsed') && 0) {
         sidebar.classList.remove('collapsed');
         navbar.classList.remove('expanded');
         mainContent.classList.remove('expanded');

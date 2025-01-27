@@ -1,12 +1,142 @@
 {% extends "dashboard/main.html" %}
-{% block title %} _('لیست کاربران') {% endblock %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %} {% trans 'users list' %} {% endblock %}
 
 {% block content %}
 
-{{LANGUAGE_CODE}}
-{{LANGUAGE_BIDI}}
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">مدیریت کاربران</h5>
+        <div>
+            <a href="{% url 'User_Add' %}" target="blank" class="btn btn-success">
+                <span class="d-none d-md-inline">ایجاد کاربر جدید &nbsp;</span>
+                <i class="fa fa-plus"></i>
+            </a>
+            <button class="btn btn-primary" id="toggleSearchBtn">
+                <span class="d-none d-md-inline">جست و جو &nbsp;</span>
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div id="searchFields"
+            class="{% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+            <form action="">
+                <div class="row mb-3">
+                    <div class="col">
+                        <input type="text" name="id" value="{{request.GET.id}}" class="form-control"
+                            placeholder="شناسه">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="name" value="{{request.GET.name}}" class="form-control"
+                            placeholder="نام / نام خانوادگی">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="username" value="{{request.GET.username}}" class="form-control"
+                            placeholder="نام کاربری">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="mobile" value="{{request.GET.mobile}}" class="form-control"
+                            placeholder="تلفن تماس">
+                    </div>
+                    <div class="col">
+                        <input type="text" name="email" value="{{request.GET.email}}" class="form-control"
+                            placeholder="ایمیل">
+                    </div>
+                    <div class="col">
+                        <select name="userKind" class="form-control">
+                            <option value="" hidden>نوع کاربر</option>
+                            {% for UserOption in UserOptions %}
+                            <option value="{{ UserOption.id }}">{{ UserOption.title }}</option>
+                            {% endfor %}
+                            <option value="All">همه</option>
+                        </select>
+                    </div>
+                    <div class="col-1">
+                        <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+                        <a class="btn btn-danger" href="./"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- اضافه کردن قابلیت اسکرول افقی به جدول -->
+        <div class="table-responsive">
+            <table class="table table-striped w-100">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>نام / نام خانوادگی</th>
+                        <th>نام کاربری</th>
+                        <th>تلفن تماس</th>
+                        <th>تاریخ ثبت‌نام</th>
+                        <th>عملیات</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }} {{ user.last_name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.mobile }}</td>
+                        <td>{{ user.date_joined|to_jalali_Year }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning">ویرایش</button>
+                            <button class="btn btn-sm btn-danger">حذف</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination pagination-sm">
+                {% if users.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo;
+                        اولین</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ users.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">قبلی</a>
+                </li>
+                {% endif %}
+                <li class="page-item disabled">
+                    <span class="page-link">صفحه {{ users.number }} از {{ users.paginator.num_pages }}</span>
+                </li>
+                {% if users.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ users.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">بعدی</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="?page={{ users.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">آخرین
+                        &raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+
+</div>
 
 
 {% endblock %}
 
-{% block extJs %}{% endblock %}
+{% block extJs %}
+<script>
+    $(document).ready(function () {
+        $('#toggleSearchBtn').click(function () {
+            $('#searchFields').toggleClass("d-none");
+        });
+
+        $("select[name='userKind'] option[value='{{request.GET.userKind}}']").prop("selected", true)
+    });
+</script>
+{% endblock %}

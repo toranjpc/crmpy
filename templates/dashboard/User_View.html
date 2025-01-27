@@ -1,0 +1,87 @@
+{% extends "dashboard/main.html" %}
+{% load i18n %}
+{% load filters %}
+
+{% block title %} {% trans pageTitle %} {% endblock %}
+
+{% block content %}
+
+    <h1>ایجاد کاربر جدید</h1>
+    <form action="{% url 'User_Add' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="f_id">F ID:</label>
+            <input type="number" id="f_id" name="f_id" value="0" required>
+        </div>
+        
+        <div>
+            <label for="sex">جنسیت:</label>
+            <select id="sex" name="sex">
+                <option value="1">مرد</option>
+                <option value="2">زن</option>
+            </select>
+        </div>
+        
+        <div>
+            <label for="ircode">کد ملی:</label>
+            <input type="text" id="ircode" name="ircode" maxlength="20" value="0">
+        </div>
+        
+        <div>
+            <label for="birth">تاریخ تولد:</label>
+            <input type="datetime-local" id="birth" name="birth">
+        </div>
+
+        <div>
+            <label for="alias">نام مستعار:</label>
+            <input type="text" id="alias" name="alias" maxlength="100">
+        </div>
+
+        <div>
+            <label for="mobile">موبایل:</label>
+            <input type="text" id="mobile" name="mobile" maxlength="15">
+        </div>
+
+        <div>
+            <label for="email">ایمیل:</label>
+            <input type="email" id="email" name="email" maxlength="191">
+        </div>
+
+        <div>
+            <label for="kind">نوع کاربر:</label>
+            <select id="kind" name="kind">
+                {% for option in UserOptions %}
+                <option value="{{ option.id }}">{{ option.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label for="per">اطلاعات شخصی:</label>
+            <textarea id="per" name="per"></textarea>
+        </div>
+
+        <div>
+            <label for="des">توضیحات:</label>
+            <textarea id="des" name="des"></textarea>
+        </div>
+        
+        <div>
+            <label for="remember_token">توکن:</label>
+            <input type="text" id="remember_token" name="remember_token" maxlength="100">
+        </div>
+        
+        <button type="submit">ایجاد کاربر</button>
+    </form>
+
+
+{% endblock %}
+
+{% block extJs %}
+<script>
+    $(document).ready(function () {
+
+
+    });
+</script>
+{% endblock %}

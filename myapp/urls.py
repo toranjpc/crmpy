@@ -2,20 +2,28 @@
 # from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .user_auth_views import login_view, logout_view
+from . import user_auth_views
 
 User_patterns = [
+    path("KindList/", views.User_Category_list, name='User_Kind_list'),
+    path("KindList/add/", views.User_Category_Add, name='User_Kind_Add'),
+    path("KindList/edit/<int:id>/", views.User_Category_Edit, name='User_Kind_Edit'),
+    path("KindList/destroy/<int:id>/", views.User_Category_Destroy, name='User_Kind_Destroy'),
+
+    
     path("", views.Users_list, name='Users_list'),
     path("add/", views.User_Add, name='User_Add'),
     path("view/<int:id>/", views.User_View, name='User_View'),
     path("copy/<int:id>/", views.User_Copy, name='User_Copy'),
     path("edit/<int:id>/", views.User_Edit, name='User_Edit'),
     path("destroy/<int:id>/", views.User_Destroy, name='User_Destroy'),
+
 ]
 
 urlpatterns = [
-    path('login/', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
+    path('login/', user_auth_views.login_view, name='login'),
+    path('logout/', user_auth_views.logout_view, name='logout'),
+    path('signup/', user_auth_views.register_view, name='signup'),
 
     path("", views.dashboard, name='dashboard'),
     
