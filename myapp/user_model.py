@@ -50,10 +50,10 @@ class UserOption(models.Model):
     kind = models.CharField(choices=KIND_CHOICES, max_length=255, null=True, blank=True)
 
     Status_CHOICES = [
+    (0, _('not active')),
     (1, _('active')),
-    (2, _('not active')),
     ]
-    status = models.SmallIntegerField(choices=Status_CHOICES, default=1)
+    status = models.SmallIntegerField(choices=Status_CHOICES, default=0)
 
     class Meta:
         db_table = 'myapp_user_options'

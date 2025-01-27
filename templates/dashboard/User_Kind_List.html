@@ -22,7 +22,7 @@
             </div>
             <div class="card-body">
                 <div id="searchFields"
-                    class="{% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
                     <form action="">
                         <div class="row mb-3">
                             <div class="col">
@@ -33,7 +33,7 @@
                                 <input type="text" name="name" value="{{request.GET.name}}" class="form-control"
                                     placeholder="عنوان">
                             </div>
-                            <div class="col-1">
+                            <div class="col-4">
                                 <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-danger" href="./"><i class="fa fa-times"></i></a>
                             </div>
@@ -61,8 +61,12 @@
                                 <td>
                                     <button class="btn btn-sm text-warning border-warning edit" type="button"><i
                                             class="fa fa-cog"></i></button>
-                                    <button class="btn btn-sm text-danger border-danger delete" type="button"><i
-                                            class="fa fa-trash"></i></button>
+
+                                    <a href="{% url 'User_Kind_Destroy' UserOption.id %}"
+                                        onclick="return confirm('آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟');"
+                                        class="btn btn-sm text-danger border-danger delete" type="button">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -109,29 +113,55 @@
     </div>
 
     <div class="col-md-4">
-        <form action="">
+        <form action="{% url 'User_Kind_Add' %}" method="post">
+            {% csrf_token %}
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">{% trans 'Add' %}</h5>
                     <div>
-                        <button class="btn btn-success">
+                        <button type="submit" class="btn btn-success">
                             <span class="d-none d-md-inline">ذخیره &nbsp;</span>
                             <i class="fa fa-save"></i>
                         </button>
-                        <a href="./" target="blank" class="btn btn-danger">
+                        <a href="./" class="btn btn-danger">
                             <span class="d-none d-md-inline">ریست لیست &nbsp;</span>
                             <i class="fa fa-times"></i>
                         </a>
                     </div>
                 </div>
                 <div class="card-body">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="btn btn-sm text-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                    {% endif %}
 
-
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label for="title">عنوان:</label>
+                                <input type="text" class="form-control" id="title" name="title" maxlength="255">
+                            </div>
+                            <div class="col-4 col-md-2">
+                                <label for="status">فعال:</label>
+                                <label class="btn bg-info border">
+                                    <input type="checkbox" id="status" value="1" name="status" checked hidden
+                                        onchange="$(this).next('i').toggleClass('fa-times fa-check').closest('label').toggleClass('bg-info bg-danger')">
+                                    <i class="fa fa-check"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="option">گزینه:</label>
+                        <textarea class="form-control" id="option" name="option"></textarea>
+                    </div>
 
                 </div>
             </div>
         </form>
     </div>
+
 
 
 </div>

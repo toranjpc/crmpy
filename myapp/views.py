@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import User, UserOption
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from django.utils import translation
 from django.db.models import Q
@@ -34,9 +36,21 @@ def dashboard(request):
 
 # User Category Start
 def User_Category_list(request):
-    UOfilters = Q(kind='UserKind')
-    UOfields = ['id', 'title','created_at']
-    queryset=UserOption.objects.values(*UOfields).filter(UOfilters)
+    filters = Q()
+    if request.GET.get('id'):
+        try:
+            user_id = int(request.GET.get('id'))
+            filters |= Q(id=user_id)
+        except ValueError:
+            pass  
+
+    if request.GET.get('name'):
+        name = request.GET.get('name')
+        filters |= Q(title__icontains=name)
+
+    filters &= Q(kind='UserKind')
+    fields = ['id', 'title','created_at']
+    queryset=UserOption.objects.values(*fields).filter(filters)
 
     page = request.GET.get('page', 1)
     paginator = Paginator(queryset, 10) 
@@ -50,16 +64,45 @@ def User_Category_list(request):
     return render(request, 'dashboard/User_Kind_List.html', {'UserOptions': UserOptions,'request':request})
 
 
+@csrf_exempt
 def User_Category_Add(request):
-    users = User.objects.all()
-    return render(request, 'dashboard/User_List.html', {'users': users})
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        option = request.POST.get('option')
+        kind = 'UserKind'
+        status = request.POST.get('status', 0)
+        
+        if not title:
+            messages.error(request, 'خطا!!! لطفا فیلد های مورد نیاز را تکمیل نمایید')
+            return redirect('User_Kind_list')
+
+        if not status:
+            status = 0
+        
+        UserOption.objects.create(
+            title=title, option=option, kind=kind, status=status
+        )
+        messages.success(request, 'کاربر با موفقیت ثبت شد.')
+        return redirect('User_Kind_list')
+
 
 def User_Category_Edit(request, id):
     return HttpResponse(id)
 
 
 def User_Category_Destroy(request, id):
-    return HttpResponse(id)
+    filters = Q(kind=id)
+    count = User.objects.filter(filters).count()
+    if count == 0:
+        filters = Q(id=id)
+        UserOption.objects.filter(filters).delete()
+        messages.success(request, 'دسته بندی با موفقیت حذف شد.')
+    else:
+        messages.error(request, 'امکان حذف وجود ندارد. کاربرانی با این دسته بندی وجود دارند.')
+
+    return redirect('User_Kind_list')
+
+
 
 
 

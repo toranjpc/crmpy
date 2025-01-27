@@ -11,3 +11,8 @@
     border-top-right-radius: unset;
     border-bottom-right-radius: unset;
 }
+
+.text-error {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important
+}
