@@ -10,6 +10,11 @@ User_patterns = [
     path("KindList/edit/<int:id>/", views.User_Category_Edit, name='User_Kind_Edit'),
     path("KindList/destroy/<int:id>/", views.User_Category_Destroy, name='User_Kind_Destroy'),
 
+    path("GroupList/", views.User_Group_list, name='User_Group_list'),
+    path("GroupList/add/", views.User_Group_Add, name='User_Group_Add'),
+    path("GroupList/edit/<int:id>/", views.User_Group_Edit, name='User_Group_Edit'),
+    path("GroupList/destroy/<int:id>/", views.User_Group_Destroy, name='User_Group_Destroy'),
+
     
     path("", views.Users_list, name='Users_list'),
     path("add/", views.User_Add, name='User_Add'),

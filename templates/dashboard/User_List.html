@@ -22,7 +22,7 @@
     </div>
     <div class="card-body">
         <div id="searchFields"
-            class="{% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+            class="{% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.UserCategory %}d-none{% endif %}">
             <form action="">
                 <div class="row mb-3">
                     <div class="col">
@@ -46,7 +46,7 @@
                             placeholder="ایمیل">
                     </div>
                     <div class="col">
-                        <select name="userKind" class="form-control">
+                        <select name="UserCategory" class="form-control">
                             <option value="" hidden>نوع کاربر</option>
                             {% for UserOption in UserOptions %}
                             <option value="{{ UserOption.id }}">{{ UserOption.title }}</option>
@@ -93,35 +93,60 @@
             </table>
         </div>
 
+
         <nav aria-label="Page navigation">
             <ul class="pagination pagination-sm">
                 {% if users.has_previous %}
                 <li class="page-item">
-                    <a class="page-link"
-                        href="?page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo;
-                        اولین</a>
+                    <a class="page-link" href="?page=1{% for key, value in request.GET.items %}
+              {% if key != 'page' %}
+                &{{ key }}={{ value }}
+              {% endif %}
+            {% endfor %}">
+                        &laquo; اولین
+                    </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"
-                        href="?page={{ users.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">قبلی</a>
+                    <a class="page-link" href="?page={{ users.previous_page_number }}{% for key, value in request.GET.items %}
+              {% if key != 'page' %}
+                &{{ key }}={{ value }}
+              {% endif %}
+            {% endfor %}">
+                        قبلی
+                    </a>
                 </li>
                 {% endif %}
                 <li class="page-item disabled">
-                    <span class="page-link">صفحه {{ users.number }} از {{ users.paginator.num_pages }}</span>
+                    <span class="page-link">
+                        صفحه
+                        {{ users.number }}
+                        از
+                        {{ users.paginator.num_pages}}
+                    </span>
                 </li>
                 {% if users.has_next %}
                 <li class="page-item">
-                    <a class="page-link"
-                        href="?page={{ users.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">بعدی</a>
+                    <a class="page-link" href="?page={{ users.next_page_number }}{% for key, value in request.GET.items %}
+              {% if key != 'page' %}
+                &{{ key }}={{ value }}
+              {% endif %}
+            {% endfor %}">
+                        بعدی
+                    </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link"
-                        href="?page={{ users.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">آخرین
-                        &raquo;</a>
+                    <a class="page-link" href="?page={{ users.paginator.num_pages }}{% for key, value in request.GET.items %}
+              {% if key != 'page' %}
+                &{{ key }}={{ value }}
+              {% endif %}
+            {% endfor %}">
+                        آخرین &raquo;
+                    </a>
                 </li>
                 {% endif %}
             </ul>
         </nav>
+
     </div>
 
 </div>
@@ -136,7 +161,7 @@
             $('#searchFields').toggleClass("d-none");
         });
 
-        $("select[name='userKind'] option[value='{{request.GET.userKind}}']").prop("selected", true)
+        $("select[name='UserCategory'] option[value='{{request.GET.UserCategory}}']").prop("selected", true)
     });
 </script>
 {% endblock %}

@@ -3,7 +3,7 @@
 {% load filters %}
 
 {% block title %}
-{% trans 'user kinds' %}
+{% trans 'user Groups' %}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
     <div class="col-md-5">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">{% trans 'user kinds' %}</h5>
+                <h5 class="mb-0">{% trans 'user Groups' %}</h5>
                 <div>
 
                     <button class="btn btn-sm btn-info viewAddForm">
@@ -68,7 +68,6 @@
                                 <th>#</th>
                                 <th>عنوان</th>
                                 <th>تاریخ ایجاد</th>
-                                <th>وضعیت</th>
                                 <th>عملیات</th>
                             </tr>
                         </thead>
@@ -78,17 +77,10 @@
                                 <td>{{ UserOption.id }}</td>
                                 <td data-title>{{ UserOption.title }}</td>
                                 <td>{{ UserOption.created_at|to_jalali }}</td>
-                                <td class="text-center">
-                                    {% if UserOption.status == 1 %}
-                                    <span class="btn p-0 text-success"><i class="fa fa-check"></i></span>
-                                    {% else %}
-                                    <span class="btn p-0 text-danger"><i class="fa fa-times"></i></span>
-                                    {% endif %}
-                                </td>
                                 <td>
                                     <button class="btn btn-sm text-warning border-warning edit" type="button"><i
                                             class="fa fa-cog"></i></button>
-                                    <a href="{% url 'User_Kind_Destroy' UserOption.id %}"
+                                    <a href="{% url 'User_Group_Destroy' UserOption.id %}"
                                         onclick="return confirm('آیا مطمئن هستید که می‌خواهید این مورد را حذف کنید؟');"
                                         class="btn btn-sm text-danger border-danger delete" type="button"><i
                                             class="fa fa-trash"></i></a>
@@ -157,7 +149,7 @@
     </div>
 
     <div class="col-md-4 d-none" id="addEditPanel">
-        <form action="{% url 'User_Kind_Add' %}" method="post" id="dataForm">
+        <form action="{% url 'User_Group_Add' %}" method="post" id="dataForm">
             {% csrf_token %}
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -192,6 +184,15 @@
                     <div class="form-group">
                         <label for="option">گزینه:</label>
                         <textarea class="form-control" id="option" name="option"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="permissions">دسترسی ها:</label>
+                        <select name="" id="">
+                            {% for permission in permissions %}
+                            <option value="{{permission.id}}">{{permission.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <textarea class="form-control" id="permissions" name="permissions"></textarea>
                     </div>
                 </div>
             </div>
@@ -285,8 +286,9 @@
             var form = JSON.parse(tr.find("textarea[data-json]").val() || '[]')
             var title = tr.find("[data-title]").text()
             $("#addEditPanel textarea[name='option']").val(form['form'])
+            $("#addEditPanel textarea[name='permissions']").val(form['permissions'])
             $("#addEditPanel input[name='title']").val(title)
-            $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Kind_Edit' 999 %}".replace(999, id))
+            $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Edit' 999 %}".replace(999, id))
             $("#addEditPanel input[name='status']").prop("checked", false).change()
             if (status == '1') $("#addEditPanel input[name='status']").prop("checked", true).change()
 
@@ -294,8 +296,9 @@
         })
         $('.viewAddForm , [type=reset]').click(function () {
             $("#addEditPanel textarea[name='option']").val('')
+            $("#addEditPanel textarea[name='permissions']").val('')
             $("#addEditPanel input[name='title']").val('')
-            $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Kind_Add' %}")
+            $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Add' %}")
             $("#addEditPanel input[name='status']").prop("checked", true).change()
 
             $("#addEditPanel").removeClass("d-none")

@@ -24,24 +24,20 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(User, CustomUserAdmin)
 
-
-
-
 class KindFilter(admin.SimpleListFilter):
-    title = 'نوع'  # عنوان فیلتر
-    parameter_name = 'kind'  # پارامتر URL
+    title = 'نوع' 
+    parameter_name = 'kind'  
 
     def lookups(self, request, model_admin):
-        # تعیین گزینه‌های فیلتر
+       
         return UserOption.KIND_CHOICES
 
     def queryset(self, request, queryset):
-        # فیلتر کردن بر اساس مقدار انتخاب‌شده
+       
         if self.value():
             return queryset.filter(kind=self.value())
         return queryset
-    
-    
+       
 @admin.register(UserOption)
 class CustomUserOption(admin.ModelAdmin):
     list_display = ('title', 'kind', 'status')

@@ -12,7 +12,14 @@
     border-bottom-right-radius: unset;
 }
 
-.text-error {
-    --bs-text-opacity: 1;
-    color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important
+.alert {
+    --bs-alert-padding-y: 10px !important;
+    font-size: 1em!important;
+}
+
+.alert-error {
+    --bs-alert-color: var(--bs-danger-text-emphasis);
+    --bs-alert-bg: var(--bs-danger-bg-subtle);
+    --bs-alert-border-color: var(--bs-danger-border-subtle);
+    --bs-alert-link-color: var(--bs-danger-text-emphasis);
 }

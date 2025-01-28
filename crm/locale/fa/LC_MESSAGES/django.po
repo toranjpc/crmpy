@@ -819,6 +819,9 @@ msgstr "ایجاد کاربر جدید"
 msgid "user kinds"
 msgstr "دسته بندی کاربران"
 
+msgid "user Groups"
+msgstr "گروه های کاربری"
+
 msgid "All dates"
 msgstr "همهٔ تاریخ‌ها"
 

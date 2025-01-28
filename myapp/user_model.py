@@ -34,8 +34,6 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
     
-    
-    
 class UserOption(models.Model):
     f_id = models.IntegerField(default=0)
     title = models.CharField(max_length=255, null=True, blank=True)
@@ -45,7 +43,8 @@ class UserOption(models.Model):
 
     KIND_CHOICES = [
         ('UserExtData', _('UserExtData')), 
-        ('UserKind', _('UserKind')), 
+        ('UserCategory', _('user kinds')), 
+        ('UserGroup', _('user Groups')), 
     ]
     kind = models.CharField(choices=KIND_CHOICES, max_length=255, null=True, blank=True)
 
