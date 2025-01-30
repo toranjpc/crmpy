@@ -12,7 +12,7 @@ from django.contrib.auth.models import Permission
 
 # simpleFront Start
 def home(request):
-    return render(request, 'front/index.html', {'datas': []})
+    return render(request, 'catalog/index.html', {'datas': []})
 
 # simpleFront End
 

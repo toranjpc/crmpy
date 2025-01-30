@@ -2,130 +2,301 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Holiday Flipbook</title>
-	<link rel="stylesheet" href="./style.css">
-
+      <meta charset="UTF-8">
+      <title>CodePen - flip book js</title>
+      <link rel='stylesheet' href='css.css'>
+      <link rel='stylesheet' href='bootstrap.min.css'>
 </head>
 
 <body>
 
-	<div class="container">
-		<div class="">
-			<div id="holidayList">
-				<div class="pages front-cover" data-density="hard">
-					<div class="page-data">
-						<h1>February 2022</h1>
-						<p>Holidays and Daily Observances in the United States</a>
-					</div>
 
-				</div>
-				<div class="pages empty-page"></div>
-				<div class="pages">
-					<div class="page-content">
-						sad
-						fsad
-						fsghj hgjlfdghdfgh
-						sdfg
-						sdfgsdfgsdfgdfj
-						gukyu
-					</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-02">2</time> Groundhog Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-03">3</time> Carrot Cake Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-04">4</time> Wear Red Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-05">5</time> Weatherperson's Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-06">6</time> Chopsticks Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-07">7</time> Periodic Table Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-08">8</time> Kite Flying Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-09">9</time> Pizza Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-10">10</time> Umbrella Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-11">11</time> Inventor's Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-12">12</time> Global Movie Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-13">13</time> Tortellini Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-14">14</time> Valentine's Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-15">15</time> Gumdrop Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-16">16</time> Do a Grouch a Favor Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-17">17</time> Cabbage Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-18">18</time> Battery Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-19">19</time> Chocolate Mint Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-20">20</time> Love Your Pet Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-21">21</time> President's Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-22">22</time> Cook a Sweet Potato Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-23">23</time> Tile Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-24">24</time> Toast Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-25">25</time> Clam Chowder Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-26">26</time> Pistachio Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-27">27</time> Polar Bear Day</div>
-				</div>
-				<div class="pages">
-					<div class="page-content"><time datetime="2022-02-28">28</time> Tooth Fairy Day</div>
-				</div>
-				<div class="pages empty-page"></div>
-				<div class="pages back-cover" data-density="hard">
-				</div>
+      <div class="flip-book" id="demoBookExample">
 
-			</div>
-		</div>
-	</div>
-	<!-- <nav>
-		<button id="prev">قبلی</button>
-		<button id="next">بعدی</button>
-	</nav> -->
+            <div class="page page-cover page-cover-top" data-density="hard">
+                  <div class="page-content">
+                        <h2>BOOK TITLE</h2>
+                  </div>
+            </div>
 
-	<!-- <aside id="notation">Flip the pages by clicking on the page or dragging from the edge or click the navigation buttons</aside> -->
-	<script type="module" src="./script.js"></script>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 1</h2>
+
+                        <div class="page-text">
+                              <iframe src="https://www.bootdey.com/snippets/view/Shop-product-list"
+                                    style="width: 90%;height: 90%; margin: 5%;" frameborder="0"></iframe>
+                        </div>
+
+                        <div class="page-footer">1</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 2</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">2</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 3</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">3</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 4</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">4</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 5</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">5</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 6</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">6</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 7</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">7</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 8</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">8</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 9</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">9</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 10</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">10</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 11</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">11</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 12</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">12</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 13</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">13</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 14</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">14</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 15</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">15</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 16</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">16</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 17</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">17</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 18</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">18</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <div class="page-content">
+                        <h2 class="page-header">Page header 19</h2>
+
+                        <div class="page-text">
+
+                        </div>
+
+                        <div class="page-footer">19</div>
+                  </div>
+            </div>
+
+            <div class="page page-cover page-cover-bottom" data-density="hard">
+                  <div class="page-content">
+                        <h2>THE END</h2>
+                  </div>
+            </div>
+
+      </div>
+
+
+      <audio id="flipsound">
+            <source src="./flipsound.ogg" type="audio/ogg">
+            <source src="./flipsound.mp3" type="audio/mpeg">
+      </audio>
+
+      <script src='page-flip.browser.min.js'></script>
+      <script id="rendered-js">
+            document.addEventListener('DOMContentLoaded', function () {
+                  const pageFlip = new St.PageFlip(
+                        document.getElementById("demoBookExample"),
+                        {
+                              width: window.innerWidth,
+                              height: window.innerHeight,
+
+                              size: "fixed",
+
+                              // set threshold values:
+                              minWidth: 425,
+                              maxWidth: 768,
+                              minHeight: 794,
+                              maxHeight: 794,
+
+                              maxShadowOpacity: 0.5, // Half shadow intensity
+                              showCover: false,
+                              mobileScrollSupport: false // disable content scrolling on mobile devices
+                        }
+                  );
+                  pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+                  // document.querySelector(".page-total").innerText = pageFlip.getPageCount();
+                  // document.querySelector(".page-orientation").innerText = pageFlip.getOrientation();
+
+                  // document.querySelector(".btn-prev").addEventListener("click", () => {
+                  //     pageFlip.flipPrev(); // Turn to the previous page (with animation)
+                  // });
+
+                  // document.querySelector(".btn-next").addEventListener("click", () => {
+                  //     pageFlip.flipNext(); // Turn to the next page (with animation)
+                  // });
+
+                  // triggered by page turning
+                  // pageFlip.on("flip", e => {
+                  // document.querySelector(".page-current").innerText = e.data + 1;
+                  // });
+
+                  // triggered when the state of the book changes
+                  pageFlip.on("changeState", e => {
+                        // document.querySelector(".page-state").innerText = e.data;
+                        if (e.data == "flipping" || e.data == "user_fold") document.getElementById("flipsound").play();
+                  });
+
+                  // triggered when page orientation changes
+                  pageFlip.on("changeOrientation", e => {
+                        // document.querySelector(".page-orientation").innerText = e.data;
+                        if (e.data == "flipping" || e.data == "user_fold") document.getElementById("flipsound").play();
+                  });
+            });
+      </script>
 
 </body>
 

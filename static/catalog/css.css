@@ -1,0 +1,228 @@
+html,
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%
+}
+
+body {
+    /* display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center; */
+}
+
+.fullpage {
+    padding-bottom: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column
+}
+
+.fullpage .main-header {
+    min-width: 0
+}
+
+.fullpage .mobile-action-button {
+    display: block;
+    width: 48%;
+    float: left;
+    text-align: center;
+    margin: 0 4% 10px 0
+}
+
+.fullpage .mobile-action-button:nth-child(even) {
+    margin-right: 0
+}
+
+.fullpage .jump-view {
+    width: 48%;
+    margin: 0 4% 10px 0;
+    float: left
+}
+
+.fullpage .jump-view:nth-child(even) {
+    margin-right: 0
+}
+
+.fullpage .jump-view:nth-child(3) {
+    display: none
+}
+
+.fullpage .jump-label {
+    display: block
+}
+
+.oldie-header {
+    display: none;
+    padding: 5px;
+    background: var(--cp-color-20);
+    color: var(--cp-color-1)
+}
+
+html.oldie .oldie-header {
+    display: block
+}
+
+html.oldie .main-header {
+    display: none
+}
+
+#result-iframe-wrap01 {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+html.oldie #result-iframe-wrap {
+    height: 100%;
+    height: calc(100% - 32px)
+}
+
+#result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 0;
+    background: var(--cp-color-1);
+    display: block;
+    width: 100%;
+    height: 100%
+}
+
+@media(max-width:550px) {
+    @supports(height:100svh) {
+        #result {
+            height: calc(100svh - var(--cp-header-height-small))
+        }
+    }
+
+    .page.--right {
+        /* height: 100% !important; */
+        /* top: 0 !important; */
+    }
+}
+
+#pen-ad {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    z-index: 1
+}
+
+
+
+
+
+
+.flip-book {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+    display: none;
+    background-size: cover;
+    height: 100%;
+    max-width: unset !important;
+}
+
+.page {
+    padding: 20px;
+    background-color: #fdfaf7;
+    color: #785e3a;
+    border: solid 1px #c2b5a3;
+    overflow: hidden;
+}
+
+.page .page-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+/* .page .page-content .page-header {
+    height: 30px;
+    font-size: 100%;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.page .page-content .page-text {
+    height: 100%;
+    flex-grow: 1;
+    font-size: 80%;
+    text-align: justify;
+    margin-top: 10px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    border-top: solid 1px #f4e8d7;
+}
+
+.page .page-content .page-footer {
+    height: 30px;
+    border-top: solid 1px #f4e8d7;
+    font-size: 80%;
+    color: #998466;
+} */
+
+.page.--left {
+    border-right: 0;
+    box-shadow: inset -7px 0 30px -7px rgba(0, 0, 0, 0.4);
+}
+
+.page.--right {
+    border-left: 0;
+    box-shadow: inset 7px 0 30px -7px rgba(0, 0, 0, 0.4);
+}
+
+.page.--right .page-footer {
+    text-align: right;
+}
+
+.page.hard {
+    background-color: #f2e8d9;
+    border: solid 1px #998466;
+}
+
+.page.page-cover {
+    background-color: #e3d0b5;
+    color: #785e3a;
+    border: solid 1px #998466;
+}
+
+.page.page-cover h2 {
+    text-align: center;
+    padding-top: 50%;
+    font-size: 210%;
+}
+
+.page.page-cover.page-cover-top {
+    box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), -2px 0 5px 2px rgba(0, 0, 0, 0.4);
+}
+
+.page.page-cover.page-cover-bottom {
+    box-shadow: inset 0px 0 30px 0px rgba(36, 10, 3, 0.5), 10px 0 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.stf__hardShadow,
+.stf__hardInnerShadow,
+.--soft.--right {
+    /* height: 100% !important; */
+}
