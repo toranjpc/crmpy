@@ -84,7 +84,7 @@ def User_Category_Add(request):
         UserOption.objects.create(
             title=title, option=option, kind=kind, status=status
         )
-        messages.success(request, 'کاربر با موفقیت ثبت شد.')
+        messages.success(request, 'عملیات با موفقیت انجام شد.')
         return redirect('User_Kind_list')
 
 @login_required
@@ -110,7 +110,7 @@ def User_Category_Edit(request, id):
         user_option.status = status
         user_option.save()
         
-        messages.success(request, 'کاربر با موفقیت ویرایش شد.')
+        messages.success(request, 'بروززسانی با موفقی انجام شد.')
         return redirect('User_Kind_list')
 
 @login_required
@@ -185,7 +185,7 @@ def User_Group_Add(request):
         UserOption.objects.create(
             title=title, option=option, kind=kind, status=status
         )
-        messages.success(request, 'کاربر با موفقیت ثبت شد.')
+        messages.success(request, 'عملیات با موفقیت انجام شد.')
         return redirect('User_Group_list')
 
 @login_required
@@ -194,31 +194,27 @@ def User_Group_Edit(request, id):
     
     if request.method == 'POST':
         title = request.POST.get('title')
-        option = {
-                    'form':request.POST.get('option'),
-                    'permissions':request.POST.get('permissions'),
-                }        # kind = 'UserGroup'
-        status = request.POST.get('status', 0)
-        
         if not title:
-            messages.error(request, 'خطا!!! لطفا فیلد های مورد نیاز را تکمیل نمایید')
+            messages.error(request, _('Error: Please fill in all required fields'))
             return redirect('User_Group_list')
-
-        if not status:
-            status = 0
+        
+        option = user_option.option or {}
+        option['form'] = request.POST.get('option')
+        option['permissions'] = request.POST.get('permissions')
+        
+        status = bool(request.POST.get('status'))
         
         user_option.title = title
         user_option.option = option
-        # user_option.kind = kind
         user_option.status = status
         user_option.save()
         
-        messages.success(request, 'کاربر با موفقیت ویرایش شد.')
+        messages.success(request, _('Group updated successfully'))
         return redirect('User_Group_list')
 
 @login_required
 def User_Group_Destroy(request, id):
-    count=0
+    count = 0
 
     filters = Q(kind=id)
     count += User.objects.filter(filters).count()
@@ -226,9 +222,9 @@ def User_Group_Destroy(request, id):
     if count == 0:
         filters = Q(id=id)
         UserOption.objects.filter(filters).delete()
-        messages.warning(request, 'دسته بندی با موفقیت حذف شد.')
+        messages.warning(request, _('Group deleted successfully'))
     else:
-        messages.error(request, 'امکان حذف وجود ندارد. کاربرانی با این دسته بندی وجود دارند.')
+        messages.error(request, _('Cannot delete group. Users with this group exist.'))
 
     return redirect('User_Group_list')
 

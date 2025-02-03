@@ -20,7 +20,7 @@ msgstr "داشبورد مدیریت"
 msgid "Page not found"
 msgstr "صفحه یافت نشد"
 
-msgid "We’re sorry, but the requested page could not be found."
+msgid "We're sorry, but the requested page could not be found."
 msgstr "شرمنده، صفحه مورد تقاضا یافت نشد."
 
 msgid "Home"
@@ -36,7 +36,7 @@ msgid "Server Error <em>(500)</em>"
 msgstr "خطای سرور <em>(500)</em>"
 
 msgid ""
-"There’s been an error. It’s been reported to the site administrators via "
+"There's been an error. It's been reported to the site administrators via "
 "email and should be fixed shortly. Thanks for your patience."
 msgstr ""
 "مشکلی پیش آمده. این مشکل از طریق ایمیل به مدیران وب‌گاه اطلاع داده شد و به "
@@ -83,14 +83,14 @@ msgstr "مشاهده"
 msgid "Change"
 msgstr "تغییر"
 
-msgid "You don’t have permission to view or edit anything."
+msgid "You don't have permission to view or edit anything."
 msgstr "شما اجازهٔ مشاهده یا ویرایش چیزی را ندارید."
 
 #, fuzzy
 #| msgid ""
-#| "First, enter a username and password. Then, you’ll be able to edit more "
+#| "First, enter a username and password. Then, you'll be able to edit more "
 #| "user options."
-msgid "After you’ve created a user, you’ll be able to edit more user options."
+msgid "After you've created a user, you'll be able to edit more user options."
 msgstr ""
 "ابتدا یک نام کاربری و گذرواژه وارد کنید. سپس می توانید مشخصات دیگر کاربر را "
 "ویرایش کنید."
@@ -216,7 +216,7 @@ msgstr ""
 msgid "Objects"
 msgstr "اشیاء"
 
-msgid "Yes, I’m sure"
+msgid "Yes, I'm sure"
 msgstr "بله، مطمئن هستم."
 
 msgid "No, take me back"
@@ -287,7 +287,7 @@ msgid "Unknown content"
 msgstr "محتوا ناشناخته"
 
 msgid ""
-"Something’s wrong with your database installation. Make sure the appropriate "
+"Something's wrong with your database installation. Make sure the appropriate "
 "database tables have been created, and make sure the database is readable by "
 "the appropriate user."
 msgstr ""
@@ -359,7 +359,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid ""
-"This object doesn’t have a change history. It probably wasn’t added via this "
+"This object doesn't have a change history. It probably wasn't added via this "
 "admin site."
 msgstr ""
 "این شیء هنوز تاریخچه تغییرات ندارد. ممکن است توسط این وب‌گاه مدیر ساخته نشده "
@@ -432,7 +432,7 @@ msgid "Your password was changed."
 msgstr "گذرواژهٔ شما تغییر یافت."
 
 msgid ""
-"Please enter your old password, for security’s sake, and then enter your new "
+"Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
 msgstr ""
 "برای امنیت بیشتر٬ لطفا گذرواژه قدیمی خود را وارد کنید٬ سپس گذرواژه جدیدتان "
@@ -471,14 +471,14 @@ msgstr ""
 "استفاده شده است. لطفاً برای یک گذرواژهٔ جدید درخواست دهید."
 
 msgid ""
-"We’ve emailed you instructions for setting your password, if an account "
+"We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered. You should receive them shortly."
 msgstr ""
 "دستورالعمل تنظیم گذرواژه را برایتان ایمیل کردیم. اگر با ایمیلی که وارد کردید "
 "اکانتی وجود داشته باشد باید به زودی این دستورالعمل‌ها  را دریافت کنید."
 
 msgid ""
-"If you don’t receive an email, please make sure you’ve entered the address "
+"If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
 msgstr ""
 "اگر ایمیلی دریافت نمی‌کنید، لطفاً بررسی کنید که آدرسی که وارد کرده‌اید همان است "
@@ -496,8 +496,8 @@ msgid "Please go to the following page and choose a new password:"
 msgstr "لطفاً به صفحهٔ زیر بروید و یک گذرواژهٔ جدید انتخاب کنید:"
 
 #, fuzzy
-#| msgid "Your username, in case you’ve forgotten:"
-msgid "In case you’ve forgotten, you are:"
+#| msgid "Your username, in case you've forgotten:"
+msgid "In case you've forgotten, you are:"
 msgstr "نام کاربری‌تان، چنانچه احیاناً یادتان رفته است:"
 
 msgid "Thanks for using our site!"
@@ -508,7 +508,7 @@ msgid "The %(site_name)s team"
 msgstr "گروه %(site_name)s"
 
 msgid ""
-"Forgotten your password? Enter your email address below, and we’ll email "
+"Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
 "گذرواژه خود را فراموش کرده اید؟ آدرس ایمیل خود را وارد کنید و ما مراحل تعیین "
@@ -644,23 +644,23 @@ msgid "log entries"
 msgstr "موارد اتفاقات"
 
 #, python-format
-msgid "Added “%(object)s”."
-msgstr "\"%(object)s\" افروده شد."
+msgid "Added "
+msgstr ""
 
 #, python-format
-msgid "Changed “%(object)s” — %(changes)s"
-msgstr "تغییر یافت \"%(object)s\" - %(changes)s"
+msgid "Changed "
+msgstr ""
 
 #, python-format
-msgid "Deleted “%(object)s.”"
-msgstr "\"%(object)s\" حدف شد."
+msgid "Deleted "
+msgstr ""
 
 msgid "LogEntry Object"
 msgstr "شئ LogEntry"
 
 #, python-brace-format
-msgid "Added {name} “{object}”."
-msgstr "{name} \"{object}\" اضافه شد."
+msgid "Added {name} "
+msgstr ""
 
 msgid "Added."
 msgstr "اضافه شد"
@@ -669,16 +669,16 @@ msgid "and"
 msgstr "و"
 
 #, python-brace-format
-msgid "Changed {fields} for {name} “{object}”."
-msgstr "{fields} برای {name} \"{object}\" تغییر یافتند."
+msgid "Changed {fields} for {name} "
+msgstr ""
 
 #, python-brace-format
 msgid "Changed {fields}."
-msgstr "{fields} تغییر یافتند."
+msgstr ""
 
 #, python-brace-format
-msgid "Deleted {name} “{object}”."
-msgstr "{name} \"{object}\" حذف شد."
+msgid "Deleted {name} "
+msgstr ""
 
 msgid "No fields changed."
 msgstr "فیلدی تغییر نیافته است."
@@ -686,51 +686,36 @@ msgstr "فیلدی تغییر نیافته است."
 msgid "None"
 msgstr "هیچ"
 
-msgid "Hold down “Control”, or “Command” on a Mac, to select more than one."
+msgid "Hold down "Control", or "Command" on a Mac, to select more than one."
 msgstr ""
-"برای انتخاب بیش از یکی، کلید \"Control\"، یا \"Command\" روی Mac، را نگه "
+"برای انتخاب بیش از یکی، کلید "Control"، یا "Command" روی Mac، را نگه "
 "دارید."
 
 #, python-brace-format
-msgid "The {name} “{obj}” was added successfully."
-msgstr "{name} \"{obj}\" با موفقیت اضافه شد."
+msgid "The {name} "
+msgstr ""
 
 msgid "You may edit it again below."
 msgstr "می‌توانید مجدداً ویرایش کنید."
 
 #, python-brace-format
 msgid ""
-"The {name} “{obj}” was added successfully. You may add another {name} "
-"below."
+"The {name} "
 msgstr ""
-"{name} \"{obj}\" با موفقیت اضافه شد. شما میتوانید {name} دیگری در قسمت "
-"پایین اضافه کنید."
 
 #, python-brace-format
 msgid ""
-"The {name} “{obj}” was changed successfully. You may edit it again below."
+"The {name} "
 msgstr ""
-"{name} \"{obj}\" با موفقیت تغییر یافت. شما میتوانید دوباره آنرا در قسمت "
-"پایین ویرایش کنید."
 
 #, python-brace-format
 msgid ""
-"The {name} “{obj}” was added successfully. You may edit it again below."
+"The {name} "
 msgstr ""
-" {name} \"{obj}\" به موفقیت اضافه شد. شما میتوانید در قسمت پایین، دوباره "
-"آن را ویرایش کنید."
 
 #, python-brace-format
-msgid ""
-"The {name} “{obj}” was changed successfully. You may add another {name} "
-"below."
+msgid "The {name} "
 msgstr ""
-"{name} \"{obj}\" با موفقیت تغییر یافت. شما میتوانید {name} دیگری در قسمت "
-"پایین اضافه کنید."
-
-#, python-brace-format
-msgid "The {name} “{obj}” was changed successfully."
-msgstr "{name} \"{obj}\" با موفقیت تغییر یافت."
 
 msgid ""
 "Items must be selected in order to perform actions on them. No items have "
@@ -743,12 +728,12 @@ msgid "No action selected."
 msgstr "فعالیتی انتخاب نشده"
 
 #, python-format
-msgid "The %(name)s “%(obj)s” was deleted successfully."
-msgstr "%(name)s·\"%(obj)s\" با موفقیت حذف شد."
+msgid "The %(name)s "
+msgstr ""
 
 #, python-format
-msgid "%(name)s with ID “%(key)s” doesn’t exist. Perhaps it was deleted?"
-msgstr "%(name)s با کلید «%(key)s» وجود ندارد. ممکن است حذف شده باشد."
+msgid "%(name)s with ID "
+msgstr ""
 
 #, python-format
 msgid "Add %s"
@@ -851,3 +836,15 @@ msgstr "در حال حاضر:"
 
 msgid "Change:"
 msgstr "تغییر یافته:"
+
+msgid "Error: Please fill in all required fields"
+msgstr "خطا!!! لطفا فیلد های مورد نیاز را تکمیل نمایید"
+
+msgid "Group updated successfully"
+msgstr "بروززسانی با موفقیت انجام شد"
+
+msgid "Group deleted successfully"
+msgstr "دسته بندی با موفقیت حذف شد"
+
+msgid "Cannot delete group. Users with this group exist."
+msgstr "امکان حذف وجود ندارد. کاربرانی با این دسته بندی وجود دارند"

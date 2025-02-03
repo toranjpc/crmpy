@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>ورود</title>
+  <title>{% trans 'Log in' %}</title>
   <!-- Bootstrap 5 CSS -->
   <link href="/static/simpleAdmin/css/bootstrap.min.css" rel="stylesheet" />
   <!-- FontAwesome برای آیکون‌ها -->
@@ -70,7 +70,7 @@
                     <input id="customCheck1" type="checkbox" name="remember_me" class="custom-control-input" >
                     <label for="customCheck1" class="custom-control-label">{% trans 'Remember password' %}</label>
                   </div>
-                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">{% trans 'Sign in' %}</button>
+                  <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm">{% trans 'Log in' %}</button>
                   <p>
                     {% trans 'You do not have an account' %}   ؟
                     <a href="{% url 'signup' %}" class="">{% trans 'Sign Up' %}</a>
