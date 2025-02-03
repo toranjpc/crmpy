@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponse, HttpResponseNotFound
 from .models import User, UserOption
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import gettext_lazy as _
 # from django.views.decorators.csrf import csrf_exempt
 from django.utils import translation
 from django.db.models import Q
@@ -161,22 +162,46 @@ def User_Group_list(request):
 
 
     permissions = Permission.objects.select_related('content_type').order_by('content_type_id')
-    return render(request, 'dashboard/User_Groups_List.html', {'UserOptions': UserOptions,'request':request,'permissions':permissions})
+    
+    # گروه‌بندی permissions بر اساس content_type
+    grouped_permissions = {}
+    for perm in permissions:
+        content_type = perm.content_type.model
+        if content_type not in grouped_permissions:
+            grouped_permissions[content_type] = {
+                'model': content_type,
+                'verbose_name': perm.content_type.name,
+                'permissions': []
+            }
+        
+        grouped_permissions[content_type]['permissions'].append({
+            'id': perm.id,
+            'name': perm.name,
+            'codename': perm.codename
+        })
+
+    # return JsonResponse({
+    #     'permissions': list(grouped_permissions.values())
+    # })
+    
+    return render(request, 'dashboard/User_Groups_List.html', {'UserOptions': UserOptions,'request':request,'permissions':grouped_permissions})
 
 # @csrf_exempt
 @login_required
 def User_Group_Add(request):
     if request.method == 'POST':
         title = request.POST.get('title')
+        permissions = request.POST.getlist('permissions[]')
+        
         option = {
-                    'form':request.POST.get('option'),
-                    'permissions':request.POST.get('permissions'),
-                }
+            'form': request.POST.get('option'),
+            'permissions': ','.join(permissions) if permissions else '',
+        }
         kind = 'UserGroup'
         status = request.POST.get('status', 0)
         
         if not title:
-            messages.error(request, 'خطا!!! لطفا فیلد های مورد نیاز را تکمیل نمایید')
+            messages.error(request, _('Error: Please fill in all required fields'))
             return redirect('User_Group_list')
 
         if not status:
@@ -185,7 +210,7 @@ def User_Group_Add(request):
         UserOption.objects.create(
             title=title, option=option, kind=kind, status=status
         )
-        messages.success(request, 'عملیات با موفقیت انجام شد.')
+        messages.success(request, _('Data updated successfully'))
         return redirect('User_Group_list')
 
 @login_required
@@ -200,8 +225,8 @@ def User_Group_Edit(request, id):
         
         option = user_option.option or {}
         option['form'] = request.POST.get('option')
-        option['permissions'] = request.POST.get('permissions')
-        
+        permissions = request.POST.getlist('permissions[]')
+        option['permissions'] = ','.join(permissions) if permissions else ''
         status = bool(request.POST.get('status'))
         
         user_option.title = title
@@ -209,7 +234,7 @@ def User_Group_Edit(request, id):
         user_option.status = status
         user_option.save()
         
-        messages.success(request, _('Group updated successfully'))
+        messages.success(request, _('Data updated successfully'))
         return redirect('User_Group_list')
 
 @login_required
@@ -222,7 +247,7 @@ def User_Group_Destroy(request, id):
     if count == 0:
         filters = Q(id=id)
         UserOption.objects.filter(filters).delete()
-        messages.warning(request, _('Group deleted successfully'))
+        messages.warning(request, _('Data deleted successfully'))
     else:
         messages.error(request, _('Cannot delete group. Users with this group exist.'))
 
@@ -304,3 +329,4 @@ def User_Destroy(request, id):
     return HttpResponse(id)
 
 # Userse End
+

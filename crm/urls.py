@@ -17,9 +17,11 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path, include
 from myapp.views import home
+# from django.contrib import admin
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
+    
     path('change-lang/', include('django.conf.urls.i18n')),  
 
     path('', home, name='home'),

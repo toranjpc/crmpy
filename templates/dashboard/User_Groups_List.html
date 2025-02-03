@@ -11,7 +11,8 @@
 {% if messages %}
 {% for message in messages %}
 <p class="alert alert-{{ message.tags }}">
-    <button class="btn btn-sm text-dark p-0 ms-2" onclick="$(this).closest('.alert').remove()"><i class="fa fa-times"></i></button>
+    <button class="btn btn-sm text-dark p-0 ms-2" onclick="$(this).closest('.alert').remove()"><i
+            class="fa fa-times"></i></button>
     {{ message }}
 </p>
 {% endfor %}
@@ -187,12 +188,15 @@
                     </div>
                     <div class="form-group">
                         <label for="permissions">دسترسی ها:</label>
-                        <select name="" id="">
-                            {% for permission in permissions %}
-                            <option value="{{permission.id}}">{{permission.name}}</option>
+                        <select id="permissions" name="permissions[]" multiple>
+                            {% for model, group in permissions.items %}
+                            <optgroup label="{{ group.verbose_name }}">
+                                {% for permission in group.permissions %}
+                                <option value="{{ permission.id }}">{{ permission.name }}</option>
+                                {% endfor %}
+                            </optgroup>
                             {% endfor %}
                         </select>
-                        <textarea class="form-control" id="permissions" name="permissions"></textarea>
                     </div>
                 </div>
             </div>
@@ -286,7 +290,11 @@
             var form = JSON.parse(tr.find("textarea[data-json]").val() || '[]')
             var title = tr.find("[data-title]").text()
             $("#addEditPanel textarea[name='option']").val(form['form'])
-            $("#addEditPanel textarea[name='permissions']").val(form['permissions'])
+            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
+            for (i of form['permissions'].split(",")) {
+                $(`#addEditPanel select[name='permissions[]'] option[value='${i}']`).prop('selected', true)
+            }
+
             $("#addEditPanel input[name='title']").val(title)
             $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Edit' 999 %}".replace(999, id))
             $("#addEditPanel input[name='status']").prop("checked", false).change()
@@ -296,7 +304,8 @@
         })
         $('.viewAddForm , [type=reset]').click(function () {
             $("#addEditPanel textarea[name='option']").val('')
-            $("#addEditPanel textarea[name='permissions']").val('')
+            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
+
             $("#addEditPanel input[name='title']").val('')
             $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Add' %}")
             $("#addEditPanel input[name='status']").prop("checked", true).change()
