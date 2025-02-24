@@ -13,7 +13,8 @@ from django.contrib.auth.models import Permission
 
 # simpleFront Start
 def home(request):
-    return render(request, 'catalog/index.html', {'datas': []})
+    product_range = range(10)  # ایجاد لیست از 0 تا 9
+    return render(request, 'catalog/index.html', {'product_range': product_range})
 
 # simpleFront End
 

@@ -1,607 +1,68 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 
 <head>
-      <meta charset="UTF-8">
-      <title>CodePen - flip book js</title>
-      <link rel='stylesheet' href='/static/catalog/css.css'>
-      <link rel='stylesheet' href='/static/catalog/bootstrap.min.css'>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <title>
+            کاتالوگ محصولات |
+            {% block title %}
+
+            {% endblock %}
+      </title>
+      <!-- Bootstrap 5 CSS -->
+      <link href="/static/simpleAdmin/css/bootstrap.min.css" rel="stylesheet" />
+      <link href="/static/simpleAdmin/css/reset-bootstrap.css" rel="stylesheet" />
+      <!-- FontAwesome برای آیکون‌ها -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+      <link href="/static/simpleAdmin/fonts/iranSans.css" rel="stylesheet" />
+      <!-- Custom CSS -->
+      <script src="/static/simpleAdmin/js/jquery-3.7.1.min.js"></script>
+
+      <meta name="csrf-token" content="{{ csrf_token }}" />
 </head>
 
 <body>
-
-
-      <div class="flip-book" id="demoBookExample">
-
-            <div class="page page-cover page-cover-top" data-density="hard">
-                  <div class="page-content">
-                        <h2>BOOK TITLE</h2>
-
-                        <div class="page-text d-flex justify-content-center align-items-center">
-
-                        </div>
-
-                  </div>
-            </div>
-
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 1</h2>
-
-                        <div class="page-text">
-                              <iframe src="https://www.bootdey.com/snippets/view/Shop-product-list"
-                                    style="width: 90%;height: 90%; margin: 5%;" frameborder="0"></iframe>
-                        </div>
-
-                        <div class="page-footer">1</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 2</h2>
-
-                        <div class="page-text">
-
-                              <style>
-                                    @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600");
-
-                                    * {
-                                          margin: 0;
-                                          padding: 0;
-                                          text-decoration: none;
-                                          box-sizing: border-box;
-                                    }
-
-                                    ::-webkit-scrollbar {
-                                          display: none;
-                                    }
-
-                                    * {
-                                          color: #28495C;
-                                          font-family: "Poppins", sans-serif;
-                                    }
-
-                                    body {
-                                          background: #FCFCFC;
-                                    }
-
-                                    .wrapper {
-                                          width: 90%;
-                                          height: 100vh;
-                                          max-width: 1180px;
-                                          margin: 0 auto;
-                                          display: grid;
-                                          grid-template-rows: 80px 1fr 80px;
-                                    }
-
-                                    header,
-                                    main,
-                                    footer {
-                                          display: grid;
-                                          grid-auto-flow: column;
-                                          align-items: center;
-                                    }
-
-                                    header {
-                                          justify-content: space-between;
-                                    }
-
-                                    ul {
-                                          display: grid;
-                                          grid-auto-flow: column;
-                                          grid-column-gap: 20px;
-                                    }
-
-                                    ul a {
-                                          font-size: 12px;
-                                          font-weight: 500;
-                                          position: relative;
-                                    }
-
-                                    ul a:after {
-                                          content: "";
-                                          opacity: 0;
-                                          border-radius: 50%;
-                                          transition: 0.4s ease-in-out;
-                                          width: 4px;
-                                          height: 4px;
-                                          background: #28495C;
-                                          position: absolute;
-                                          left: 50%;
-                                          bottom: 0;
-                                          transform: translate(-50%, 0);
-                                    }
-
-                                    ul a.active:after,
-                                    ul a:hover:after {
-                                          opacity: 1;
-                                          bottom: -15px;
-                                    }
-
-                                    #actions i+i {
-                                          margin-left: 20px;
-                                    }
-
-                                    main {
-                                          grid-template-columns: 350px 1fr;
-                                    }
-
-                                    #catalog h1 {
-                                          font-weight: 600;
-                                          font-size: 48px;
-                                    }
-
-                                    #catalog p {
-                                          font-weight: 500;
-                                          line-height: 28px;
-                                          font-size: 16px;
-                                          margin: 20px 0 35px 0;
-                                    }
-
-                                    #catalog a {
-                                          font-weight: 600;
-                                          line-height: 28px;
-                                          font-size: 12px;
-                                          color: #fff;
-                                          letter-spacing: 0.5px;
-                                          border-radius: 90px;
-                                          padding: 15px 20px;
-                                          box-shadow: 0 10px 15px rgba(53, 29, 136, 0.2);
-                                          background: linear-gradient(90deg, #9F51E8 0%, #351DB8 100%);
-                                    }
-
-                                    #products {
-                                          display: grid;
-                                          grid-auto-flow: column;
-                                          grid-auto-rows: 480px;
-                                          grid-template-columns: repeat(3, 350px);
-                                          grid-column-gap: 20px;
-                                          overflow-x: scroll;
-                                          padding: 10px;
-                                    }
-
-                                    #products::-webkit-scrollbar {
-                                          height: 8px;
-                                    }
-
-                                    #products::-webkit-scrollbar-thumb {
-                                          border-radius: 90px;
-                                          background: rgba(0, 0, 0, 0.2);
-                                    }
-
-                                    #products .card {
-                                          background: #fff;
-                                          border-radius: 8px;
-                                          padding: 10px;
-                                          margin-bottom: 10px;
-                                          cursor: pointer;
-                                          position: relative;
-                                          overflow: hidden;
-                                          display: flex;
-                                          transition: 0.4s ease-in-out;
-                                    }
-
-                                    #products .card:hover {
-                                          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-                                    }
-
-                                    #products .card:hover .backdrop {
-                                          bottom: -78%;
-                                    }
-
-                                    #products .card .backdrop {
-                                          width: 600px;
-                                          height: 600px;
-                                          position: absolute;
-                                          left: 50%;
-                                          bottom: -80%;
-                                          transform: translate(-50%, 0);
-                                          border-radius: 50%;
-                                          transition: 0.4s ease-in-out;
-                                    }
-
-                                    #products .card:first-child .backdrop {
-                                          background: linear-gradient(180deg, #8B3FD3 0%, #3F28DD 26.52%);
-                                    }
-
-                                    #products .card:nth-child(2) .backdrop {
-                                          background: linear-gradient(180deg, #FFC957 0%, #F06E0E 25.43%);
-                                    }
-
-                                    #products .card:last-child .backdrop {
-                                          background: linear-gradient(180deg, #F041C2 0%, #D41C39 25.43%);
-                                    }
-
-                                    #products .card .fav,
-                                    #products .card .cart {
-                                          width: 40px;
-                                          height: 40px;
-                                          background: #fff;
-                                          position: absolute;
-                                          top: 10px;
-                                          right: 10px;
-                                          transform: translate(, );
-                                          line-height: 52px;
-                                          text-align: center;
-                                          border-radius: 4px;
-                                          cursor: pointer;
-                                          border: 1px solid #E8E8E8;
-                                          transition: 0.4s ease-in-out;
-                                    }
-
-                                    #products .card .fav i,
-                                    #products .card .cart i {
-                                          font-size: 20px;
-                                          color: #E8E8E8;
-                                          transition: 0.4s ease-in-out;
-                                    }
-
-                                    #products .card .fav:hover,
-                                    #products .card .cart:hover {
-                                          background: #ff4d4d;
-                                          border: 1px solid transparent;
-                                    }
-
-                                    #products .card .fav:hover i,
-                                    #products .card .cart:hover i {
-                                          color: #fff;
-                                    }
-
-                                    #products .card .cart {
-                                          top: unset;
-                                          bottom: 10px;
-                                          border: 1px solid transparent;
-                                    }
-
-                                    #products .card .cart:hover {
-                                          background: #fff;
-                                    }
-
-                                    #products .card .cart:hover i {
-                                          color: #28495C;
-                                    }
-
-                                    #products .card img {
-                                          position: absolute;
-                                          top: 50%;
-                                          left: 50%;
-                                          transform: translate(-50%, -50%);
-                                    }
-
-                                    #products .card .desc {
-                                          align-self: flex-end;
-                                          z-index: 12;
-                                    }
-
-                                    #products .card .desc span {
-                                          width: auto;
-                                          height: 40px;
-                                          background: #fff;
-                                          display: inline-block;
-                                          line-height: 44px;
-                                          font-size: 14px;
-                                          border-radius: 4px;
-                                          padding: 0 15px;
-                                          margin-right: 10px;
-                                    }
-
-                                    footer {
-                                          justify-content: space-between;
-                                    }
-
-                                    #social i {
-                                          margin-right: 20px;
-                                          cursor: pointer;
-                                          opacity: 0.4;
-                                    }
-
-                                    #social i:hover {
-                                          opacity: 1;
-                                    }
-                              </style>
-
-                              <div class="wrapper">
-                                    <main>
-                                          <div id="catalog">
-                                                <h1>Our <br> Catalog</h1>
-                                                <p>A curated list of <br> trending products.</p><a href="#">EXPLORE</a>
-                                          </div>
-                                          <div id="products">
-                                                <div class="card">
-                                                      <div class="backdrop"></div>
-                                                      <div class="fav"><i class="material-icons">favorite</i></div><img
-                                                            src="https://res.cloudinary.com/prvnbist/image/upload/v1521472820/tshirt_thread.png"
-                                                            alt="Product Image" />
-                                                      <div class="desc"><span>Dev T-Shirt</span><span>$25</span>
-                                                            <div class="cart"><i
-                                                                        class="material-icons">shopping_cart</i></div>
-                                                      </div>
-                                                </div>
-                                                <div class="card">
-                                                      <div class="backdrop"></div>
-                                                      <div class="fav"><i class="material-icons">favorite</i></div><img
-                                                            src="https://res.cloudinary.com/prvnbist/image/upload/v1521472820/nike_thread.png"
-                                                            alt="Product Image" />
-                                                      <div class="desc"><span>Nike Prime</span><span>$88</span>
-                                                            <div class="cart"><i
-                                                                        class="material-icons">shopping_cart</i></div>
-                                                      </div>
-                                                </div>
-                                                <div class="card">
-                                                      <div class="backdrop"></div>
-                                                      <div class="fav"><i class="material-icons">favorite</i></div><img
-                                                            src="https://res.cloudinary.com/prvnbist/image/upload/v1521472820/jacket_thread.png"
-                                                            alt="Product Image" />
-                                                      <div class="desc"><span>jacket</span><span>$110</span>
-                                                            <div class="cart"><i
-                                                                        class="material-icons">shopping_cart</i></div>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </main>
-                              </div>
-
-                        </div>
-
-                        <div class="page-footer">2</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 3</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">3</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 4</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">4</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 5</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">5</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 6</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">6</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 7</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">7</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 8</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">8</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 9</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">9</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 10</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">10</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 11</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">11</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 12</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">12</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 13</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">13</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 14</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">14</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 15</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">15</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 16</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">16</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 17</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">17</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 18</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">18</div>
-                  </div>
-            </div>
-            <div class="page">
-                  <div class="page-content">
-                        <h2 class="page-header">Page header 19</h2>
-
-                        <div class="page-text">
-
-                        </div>
-
-                        <div class="page-footer">19</div>
-                  </div>
-            </div>
-
-            <div class="page page-cover page-cover-bottom" data-density="hard">
-                  <div class="page-content">
-                        <h2>THE END</h2>
-                  </div>
-            </div>
-
+      <!-- لودینگ Overlay -->
+      <div id="loading" class="loading-overlay">
+            <div class="loading-spinner"></div>
       </div>
 
+      <!-- گرید عکس‌ها -->
+      <div class="container-fluid">
+          <div class="row overflow-auto" style="height: 200px;">
+              <div class="col-12">
+                  <div class="d-flex flex-nowrap" style="width: 100%;">
+                      {% for i in "0123456789" %}
+                      <div class="p-2">
+                          <a href="35465"> <!-- لینک به صفحه محصول -->
+                              <img src="https://via.placeholder.com/150" class="img-thumbnail" alt="Product {{ i }}" />
+                          </a>
+                      </div>
+                      {% endfor %}
+                  </div>
+              </div>
+          </div>
+          <h5 class="text-center mt-2">محصولات جدید</h5> <!-- عنوان زیر عکس‌ها -->
+      </div>
 
-      <audio id="flipsound">
-            <source src="/static/catalog/flipsound.ogg" type="audio/ogg">
-            <source src="/static/catalog/flipsound.mp3" type="audio/mpeg">
-      </audio>
+      <!-- Bootstrap 5 JS -->
+      <script src="/static/simpleAdmin/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/simpleAdmin/js/popper.min.js"></script>
 
-      <script src='/static/catalog/page-flip.browser.min.js'></script>
-      <script id="rendered-js">
-            document.addEventListener('DOMContentLoaded', function () {
-                  const pageFlip = new St.PageFlip(
-                        document.getElementById("demoBookExample"),
-                        {
-                              width: window.innerWidth,
-                              height: window.innerHeight - 100,
+      <script src="/static/assets/select2/select2.min.js"></script>
+      <link href="/static/assets/select2/select2.min.css" rel="stylesheet">
 
-                              size: "fixed",
+      <link href="/static/assets/confrim/jquery-confirm.min.css" rel="stylesheet" />
+      <script src="/static/assets/confrim/jquery-confirm.min.js"></script>
 
-                              // set threshold values:
-                              minWidth: 425,
-                              maxWidth: 768,
-                              minHeight: 794,
-                              maxHeight: 794,
+      <script src="/static/simpleAdmin/js/main.js"></script>
+      <!-- Custom JS -->
+      {% block extJs %}
 
-                              maxShadowOpacity: 0.5, // Half shadow intensity
-                              showCover: false,
-                              mobileScrollSupport: false // disable content scrolling on mobile devices
-                        }
-                  );
-                  pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-                  // document.querySelector(".page-total").innerText = pageFlip.getPageCount();
-                  // document.querySelector(".page-orientation").innerText = pageFlip.getOrientation();
-
-                  // document.querySelector(".btn-prev").addEventListener("click", () => {
-                  //     pageFlip.flipPrev(); // Turn to the previous page (with animation)
-                  // });
-
-                  // document.querySelector(".btn-next").addEventListener("click", () => {
-                  //     pageFlip.flipNext(); // Turn to the next page (with animation)
-                  // });
-
-                  // triggered by page turning
-                  // pageFlip.on("flip", e => {
-                  // document.querySelector(".page-current").innerText = e.data + 1;
-                  // });
-
-                  // triggered when the state of the book changes
-                  pageFlip.on("changeState", e => {
-                        // document.querySelector(".page-state").innerText = e.data;
-                        if (e.data == "flipping" || e.data == "user_fold") document.getElementById("flipsound").play();
-                  });
-
-                  // triggered when page orientation changes
-                  pageFlip.on("changeOrientation", e => {
-                        // document.querySelector(".page-orientation").innerText = e.data;
-                        if (e.data == "flipping" || e.data == "user_fold") document.getElementById("flipsound").play();
-                  });
-            });
-      </script>
-
+      {% endblock %}
 </body>
 
 </html>
