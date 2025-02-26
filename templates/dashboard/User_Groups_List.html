@@ -39,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div id="searchFields"
-                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email %}d-none{% endif %}">
                     <form action="">
                         <div class="row mb-3">
                             <div class="col">
@@ -186,18 +186,7 @@
                         <label for="option">گزینه:</label>
                         <textarea class="form-control" id="option" name="option"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="permissions">دسترسی ها:</label>
-                        <select id="permissions" name="permissions[]" multiple>
-                            {% for model, group in permissions.items %}
-                            <optgroup label="{{ group.verbose_name }}">
-                                {% for permission in group.permissions %}
-                                <option value="{{ permission.id }}">{{ permission.name }}</option>
-                                {% endfor %}
-                            </optgroup>
-                            {% endfor %}
-                        </select>
-                    </div>
+
                 </div>
             </div>
         </form>
@@ -216,8 +205,6 @@
         $('#toggleSearchBtn').click(function () {
             $('#searchFields').toggleClass("d-none");
         });
-
-        $("select[name='userKind'] option[value='{{request.GET.userKind}}']").prop("selected", true)
 
         var formmakeroption = {
             // disableFields: ['text', 'select', 'checkbox-group', 'radio-group', 'button', 'textarea', 'header', 'paragraph',],
@@ -290,10 +277,6 @@
             var form = JSON.parse(tr.find("textarea[data-json]").val() || '[]')
             var title = tr.find("[data-title]").text()
             $("#addEditPanel textarea[name='option']").val(form['form'])
-            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
-            for (i of form['permissions'].split(",")) {
-                $(`#addEditPanel select[name='permissions[]'] option[value='${i}']`).prop('selected', true)
-            }
 
             $("#addEditPanel input[name='title']").val(title)
             $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Edit' 999 %}".replace(999, id))
@@ -304,7 +287,6 @@
         })
         $('.viewAddForm , [type=reset]').click(function () {
             $("#addEditPanel textarea[name='option']").val('')
-            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
 
             $("#addEditPanel input[name='title']").val('')
             $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Group_Add' %}")

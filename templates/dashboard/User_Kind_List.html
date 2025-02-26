@@ -11,7 +11,8 @@
 {% if messages %}
 {% for message in messages %}
 <p class="alert alert-{{ message.tags }}">
-    <button class="btn btn-sm text-dark p-0 ms-2" onclick="$(this).closest('.alert').remove()"><i class="fa fa-times"></i></button>
+    <button class="btn btn-sm text-dark p-0 ms-2" onclick="$(this).closest('.alert').remove()"><i
+            class="fa fa-times"></i></button>
     {{ message }}
 </p>
 {% endfor %}
@@ -38,7 +39,7 @@
             </div>
             <div class="card-body">
                 <div id="searchFields"
-                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email and not request.GET.userKind %}d-none{% endif %}">
+                    class="w-100 {% if not request.GET.id and not request.GET.name and not request.GET.username and not request.GET.mobile and not request.GET.email %}d-none{% endif %}">
                     <form action="">
                         <div class="row mb-3">
                             <div class="col">
@@ -193,6 +194,18 @@
                         <label for="option">گزینه:</label>
                         <textarea class="form-control" id="option" name="option"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="permissions">دسترسی ها:</label>
+                        <select id="permissions" name="permissions[]" multiple>
+                            {% for model, group in permissions.items %}
+                            <optgroup label="{{ group.verbose_name }}">
+                                {% for permission in group.permissions %}
+                                <option value="{{ permission.id }}">{{ permission.name }}</option>
+                                {% endfor %}
+                            </optgroup>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
         </form>
@@ -211,8 +224,6 @@
         $('#toggleSearchBtn').click(function () {
             $('#searchFields').toggleClass("d-none");
         });
-
-        $("select[name='userKind'] option[value='{{request.GET.userKind}}']").prop("selected", true)
 
         var formmakeroption = {
             // disableFields: ['text', 'select', 'checkbox-group', 'radio-group', 'button', 'textarea', 'header', 'paragraph',],
@@ -290,6 +301,13 @@
             $("#addEditPanel input[name='status']").prop("checked", false).change()
             if (status == '1') $("#addEditPanel input[name='status']").prop("checked", true).change()
 
+            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
+            if (form['permissions']) {
+                for (i of form['permissions'].split(",")) {
+                    $(`#addEditPanel select[name='permissions[]'] option[value='${i}']`).prop('selected', true)
+                }
+            }
+
             $("#addEditPanel").removeClass("d-none")
         })
         $('.viewAddForm , [type=reset]').click(function () {
@@ -297,6 +315,7 @@
             $("#addEditPanel input[name='title']").val('')
             $("#addEditPanel form#dataForm").prop("action", "{% url 'User_Kind_Add' %}")
             $("#addEditPanel input[name='status']").prop("checked", true).change()
+            $("#addEditPanel select[name='permissions[]'] option").prop('selected', false)
 
             $("#addEditPanel").removeClass("d-none")
             if ($(this).is("[type='reset']")) $("#addEditPanel").addClass("d-none")

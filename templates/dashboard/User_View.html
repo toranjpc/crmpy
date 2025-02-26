@@ -6,73 +6,113 @@
 
 {% block content %}
 
-    <h1>ایجاد کاربر جدید</h1>
+<div class="col-12">
     <form action="{% url 'User_Add' %}" method="post">
         {% csrf_token %}
-        <div>
-            <label for="f_id">F ID:</label>
-            <input type="number" id="f_id" name="f_id" value="0" required>
-        </div>
-        
-        <div>
-            <label for="sex">جنسیت:</label>
-            <select id="sex" name="sex">
-                <option value="1">مرد</option>
-                <option value="2">زن</option>
-            </select>
-        </div>
-        
-        <div>
-            <label for="ircode">کد ملی:</label>
-            <input type="text" id="ircode" name="ircode" maxlength="20" value="0">
-        </div>
-        
-        <div>
-            <label for="birth">تاریخ تولد:</label>
-            <input type="datetime-local" id="birth" name="birth">
-        </div>
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"></h5>
+                <div>
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <span class="d-none d-md-inline">ذخیره &nbsp;</span>
+                        <i class="fa fa-save"></i>
+                    </button>
+                    <button type="reset" class="btn btn-sm btn-danger">
+                        <span class="d-none d-md-inline">پاکسازی فرم &nbsp;</span>
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="form-group row mb-2">
+                        <div class="col-4 col-md-2">
+                            <label for="status">جنسیت:</label>
+                            <select name="sex" class="form-control" id="">
+                                <option value="1">آقا</option>
+                                <option value="2" selected="{% if User and   User.sex != 2 %}false{% endif %}">خانم
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="status">نوع کاربری:</label>
+                            <select name="kind" class="form-control" id="">
+                                {% for option in UserOptions %}
+                                <option value="{{ option.id }}">{{ option.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="title">نام نمایشی:</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col">
+                            <label for="title">نام:</label>
+                            <input type="text" class="form-control" id="name" name="name" maxlength="255" />
+                        </div>
+                        <div class="col">
+                            <label for="title">نام خانوادگی:</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col">
+                            <label for="title">تلفن همراه:</label>
+                            <input type="text" class="form-control" id="name" name="name" maxlength="255" />
+                        </div>
+                        <div class="col">
+                            <label for="title">ایمیل:</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col">
+                            <label for="title">کد ملی:</label>
+                            <input type="text" class="form-control" id="name" name="name" maxlength="255" />
+                        </div>
+                        <div class="col">
+                            <label for="title">تاریخ تولد:</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                        </div>
+                    </div>
+                    <div class="form-group row mb-2">
+                        <div class="col">
+                            <label for="title">نام کاربری:</label>
+                            <input type="text" class="form-control" id="name" name="name" maxlength="255" />
+                        </div>
+                        <div class="col">
+                            <label for="title">کلمه عبور:</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="255" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="option">توضیحات:</label>
+                        <textarea class="form-control" id="option" name="option"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="w-100">
+                        <label for="status">دستبندی:</label>
+                        <select name="sex" class="form-control" id="">
+                            {% for UserGroup in UserGroups %}
+                            <option value="{{ UserGroup.id }}">{{ UserGroup.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <ul class="w-100">
+                        <li>عنوان دسته بندی</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    121
+                </div>
 
-        <div>
-            <label for="alias">نام مستعار:</label>
-            <input type="text" id="alias" name="alias" maxlength="100">
+            </div>
         </div>
-
-        <div>
-            <label for="mobile">موبایل:</label>
-            <input type="text" id="mobile" name="mobile" maxlength="15">
-        </div>
-
-        <div>
-            <label for="email">ایمیل:</label>
-            <input type="email" id="email" name="email" maxlength="191">
-        </div>
-
-        <div>
-            <label for="kind">نوع کاربر:</label>
-            <select id="kind" name="kind">
-                {% for option in UserOptions %}
-                <option value="{{ option.id }}">{{ option.title }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div>
-            <label for="per">اطلاعات شخصی:</label>
-            <textarea id="per" name="per"></textarea>
-        </div>
-
-        <div>
-            <label for="des">توضیحات:</label>
-            <textarea id="des" name="des"></textarea>
-        </div>
-        
-        <div>
-            <label for="remember_token">توکن:</label>
-            <input type="text" id="remember_token" name="remember_token" maxlength="100">
-        </div>
-        
-        <button type="submit">ایجاد کاربر</button>
     </form>
+</div>
 
 
 {% endblock %}

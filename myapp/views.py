@@ -65,14 +65,37 @@ def User_Category_list(request):
     except EmptyPage:
         UserOptions = paginator.page(paginator.num_pages)
 
-    return render(request, 'dashboard/User_Kind_List.html', {'UserOptions': UserOptions,'request':request})
+
+    permissions = Permission.objects.select_related('content_type').order_by('content_type_id')
+    # گروه‌بندی permissions بر اساس content_type
+    grouped_permissions = {}
+    for perm in permissions:
+        content_type = perm.content_type.model
+        if content_type not in grouped_permissions:
+            grouped_permissions[content_type] = {
+                'model': content_type,
+                'verbose_name': perm.content_type.name,
+                'permissions': []
+            }
+        
+        grouped_permissions[content_type]['permissions'].append({
+            'id': perm.id,
+            'name': perm.name,
+            'codename': perm.codename
+        })
+        
+    return render(request, 'dashboard/User_Kind_List.html', {'UserOptions': UserOptions,'request':request,'permissions':grouped_permissions})
 
 # @csrf_exempt
 @login_required
 def User_Category_Add(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        option = {'form':request.POST.get('option')}
+        permissions = request.POST.getlist('permissions[]')
+
+        option = {'form':request.POST.get('option'),
+                'permissions': ','.join(permissions) if permissions else '',
+                }
         kind = 'UserCategory'
         status = request.POST.get('status', 0)
         
@@ -95,8 +118,10 @@ def User_Category_Edit(request, id):
     
     if request.method == 'POST':
         title = request.POST.get('title')
-        option = {'form': request.POST.get('option')}
-        # kind = 'UserCategory'
+        option = user_option.option or {}
+        option['form'] = request.POST.get('option')
+        permissions = request.POST.getlist('permissions[]')
+        option['permissions'] = ','.join(permissions) if permissions else ''        # kind = 'UserCategory'
         status = request.POST.get('status', 0)
         
         if not title:
@@ -161,42 +186,20 @@ def User_Group_list(request):
     except EmptyPage:
         UserOptions = paginator.page(paginator.num_pages)
 
-
-    permissions = Permission.objects.select_related('content_type').order_by('content_type_id')
-    
-    # گروه‌بندی permissions بر اساس content_type
-    grouped_permissions = {}
-    for perm in permissions:
-        content_type = perm.content_type.model
-        if content_type not in grouped_permissions:
-            grouped_permissions[content_type] = {
-                'model': content_type,
-                'verbose_name': perm.content_type.name,
-                'permissions': []
-            }
-        
-        grouped_permissions[content_type]['permissions'].append({
-            'id': perm.id,
-            'name': perm.name,
-            'codename': perm.codename
-        })
-
     # return JsonResponse({
     #     'permissions': list(grouped_permissions.values())
     # })
     
-    return render(request, 'dashboard/User_Groups_List.html', {'UserOptions': UserOptions,'request':request,'permissions':grouped_permissions})
+    return render(request, 'dashboard/User_Groups_List.html', {'UserOptions': UserOptions,'request':request})
 
 # @csrf_exempt
 @login_required
 def User_Group_Add(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        permissions = request.POST.getlist('permissions[]')
         
         option = {
             'form': request.POST.get('option'),
-            'permissions': ','.join(permissions) if permissions else '',
         }
         kind = 'UserGroup'
         status = request.POST.get('status', 0)
@@ -226,8 +229,6 @@ def User_Group_Edit(request, id):
         
         option = user_option.option or {}
         option['form'] = request.POST.get('option')
-        permissions = request.POST.getlist('permissions[]')
-        option['permissions'] = ','.join(permissions) if permissions else ''
         status = bool(request.POST.get('status'))
         
         user_option.title = title
@@ -308,12 +309,18 @@ def User_Add(request):
     UOfilters = Q(kind='UserCategory')
     UOfields = ['id', 'title']
     UserOptions=UserOption.objects.values(*UOfields).filter(UOfilters)
+
+    UGfilters = Q(kind='UserGroup')
+    UGfields = ['id', 'title']
+    UserGroups=UserOption.objects.values(*UGfields).filter(UGfilters)
     
-    return render(request, 'dashboard/User_Kind_List.html', {'UserOptions':UserOptions, 'pageTitle':'user add'})
+    return render(request, 'dashboard/User_View.html', {'UserOptions':UserOptions,'UserGroups':UserGroups, 'pageTitle':'user add'})
 
 @login_required
 def User_View(request, id):
-    return HttpResponse(id)
+    user = get_object_or_404(User, id=id)
+    # return HttpResponse(user)
+    return render(request, 'dashboard/User_View.html', {'user': user})
 
 @login_required
 def User_Copy(request, id):
