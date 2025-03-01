@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Form.io Form Builder</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='formio.full.min.css'>
+  <link rel='stylesheet' href='prism-okaidia.min.css'>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <div class="container mt-3">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#builder" role="tab" data-toggle="tab">Builder</a>
+      </li>
+      <li role="presentation">
+        <a href="#form" role="tab" data-toggle="tab">Form</a>
+      </li>
+      <li role="presentation">
+        <a href="#result" role="tab" data-toggle="tab">Result</a>
+      </li>
+    </ul>
+    <div class="tab-content container">
+      <div class="tab-pane fade in active" id="builder" role="tabpanel">
+        <div id="formio-builder"></div>
+      </div>
+      <div class="tab-pane fade" id="form" role="tabpanel">
+        <pre><code class="language-javascript"></code></pre>
+      </div>
+      <div class="tab-pane fade" id="result" role="tabpanel">
+        <div id="formio-form">
+          Form not initialized
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- partial -->
+  <script src='https://code.jquery.com/jquery-3.3.1.slim.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='formio.full.min.js'></script>
+  <script src='prism.min.js'></script>
+  <script src='prism-javascript.min.js'></script>
+  <script src='prism-json.min.js'></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

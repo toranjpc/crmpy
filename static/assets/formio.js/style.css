@@ -1,0 +1,19 @@
+body {
+ padding: 20px;  
+}
+
+.tab-content.container {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+pre {
+  height: 450px;
+  overflow-y: scroll;
+}
+
+body {
+	padding: 20px;
+}

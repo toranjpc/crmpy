@@ -9,7 +9,7 @@ from django.utils import translation
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import Permission
-
+from django.forms.models import model_to_dict
 
 # simpleFront Start
 def home(request):
@@ -115,13 +115,18 @@ def User_Category_Add(request):
 @login_required
 def User_Category_Edit(request, id):
     user_option = get_object_or_404(UserOption, id=id)
-    
+
     if request.method == 'POST':
+        if request.resolver_match.url_name == 'User_Kind_View':
+            user_option_data = model_to_dict(user_option)
+            return JsonResponse(user_option_data)
+
         title = request.POST.get('title')
         option = user_option.option or {}
         option['form'] = request.POST.get('option')
         permissions = request.POST.getlist('permissions[]')
-        option['permissions'] = ','.join(permissions) if permissions else ''        # kind = 'UserCategory'
+        option['permissions'] = ','.join(permissions) if permissions else ''
+        # kind = 'UserCategory'
         status = request.POST.get('status', 0)
         
         if not title:
@@ -139,6 +144,9 @@ def User_Category_Edit(request, id):
         
         messages.success(request, 'بروززسانی با موفقی انجام شد.')
         return redirect('User_Kind_list')
+
+    return HttpResponse(status=404)
+
 
 @login_required
 def User_Category_Destroy(request, id):
@@ -221,7 +229,13 @@ def User_Group_Add(request):
 def User_Group_Edit(request, id):
     user_option = get_object_or_404(UserOption, id=id)
     
+    if request.method == 'GET':
+        if request.resolver_match.url_name == 'User_Group_View':
+            user_option_data = model_to_dict(user_option)
+            return JsonResponse(user_option_data)
+    
     if request.method == 'POST':
+
         title = request.POST.get('title')
         if not title:
             messages.error(request, _('Error: Please fill in all required fields'))
@@ -238,6 +252,8 @@ def User_Group_Edit(request, id):
         
         messages.success(request, _('Data updated successfully'))
         return redirect('User_Group_list')
+    
+    return HttpResponse(status=404)
 
 @login_required
 def User_Group_Destroy(request, id):

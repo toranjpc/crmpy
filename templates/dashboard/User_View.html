@@ -28,7 +28,7 @@
                     <div class="form-group row mb-2">
                         <div class="col-4 col-md-2">
                             <label for="status">جنسیت:</label>
-                            <select name="sex" class="form-control" id="">
+                            <select name="sex" class="form-control px-0 text-center" id="">
                                 <option value="1">آقا</option>
                                 <option value="2" selected="{% if User and   User.sex != 2 %}false{% endif %}">خانم
                                 </option>
@@ -92,21 +92,24 @@
                         <textarea class="form-control" id="option" name="option"></textarea>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-3 col-4">
-                    <div class="w-100">
-                        <label for="status">دستبندی:</label>
-                        <select name="sex" class="form-control" id="">
+                <div class="col-lg-3 col-md-6 col-12 userKindForm">
+                </div>
+
+                <div class="col-lg-2 col-md-2 col-3">
+                    <div class="w-100 position-relative">
+                        <!-- <label for="Categores">دستبندی:</label> -->
+                        <select data-name="Categores" class="form-control" id="Categores">
+                            <option value="" hidden>انتخاب دستبندی</option>
                             {% for UserGroup in UserGroups %}
-                            <option value="{{ UserGroup.id }}">{{ UserGroup.title }}</option>
+                            <option data-value="{{ UserGroup.id }}">{{ UserGroup.title }}</option>
                             {% endfor %}
                         </select>
+                        <span class="btn text-info position-absolute addCategory" style="bottom: 0;left: 0;"><i
+                                class="fa fa-plus"></i></span>
                     </div>
-                    <ul class="w-100">
-                        <li>عنوان دسته بندی</li>
-                    </ul>
+                    <div class="mt-2 w-100 CategoresTabs h-100 overflow-y-auto" style="max-height: 350px;"></div>
                 </div>
-                <div class="col">
-                    121
+                <div class="col CategoresForms">
                 </div>
 
             </div>
@@ -118,8 +121,78 @@
 {% endblock %}
 
 {% block extJs %}
+<script src="/static/assets/form_bilder/form-render.min.js?v=3.4.2"></script>
+
 <script>
     $(document).ready(function () {
+        //     var ExtDataG = JSON.parse({ % json_encode($User -> des['extDataGroup'] ?? '[]') %});
+        // var groupData = { % json_encode($User -> UserGroupForm -> option ?? []) %};
+        // var GDfD = groupData.formData;
+        // for (let c in GDfD) {
+        //     if (!ExtDataG[GDfD[c].name]) continue;
+        //     let typp = GDfD[c].type;
+        //     if (!GDfD[c]["values"]) {
+        //         GDfD[c]["value"] = ExtDataG[GDfD[c].name];
+        //     } else {
+        //         for (let d in GDfD[c]["values"]) {
+        //             if (ExtDataG[GDfD[c].name][GDfD[c]["values"][d]["value"]] ||
+        //                 ExtDataG[GDfD[c].name] == GDfD[c]["values"][d]["value"]) {
+        //                 GDfD[c]["values"][d]["selected"] = true;
+        //             } else {
+        //                 GDfD[c]["values"][d]["selected"] = false;
+        //             }
+        //         }
+        //     }
+        // }
+        // $("#extDataGroup").html(`<form>${showforms([{ "type": "paragraph", "subtype": "p", "label": "متن توضیحات\n", "access": false }, { "type": "header", "subtype": "h1", "label": "تیتر\n", "access": false }])}</form>`);
+        // $(".userKindForm").html()
+
+
+
+        $(document).on("click", "[data-tabLink]", function () {
+            var id = $(this).attr("data-tabLink")
+            $(".CategoresForms div[data-tab]").addClass("d-none")
+            $(".CategoresForms div[data-tab='" + id + "']").removeClass("d-none")
+        })
+        $(document).on("click", ".removeCategoryTab", function () {
+            var parent = $(this).closest("[data-tablink]")
+            var id = parent.attr("data-tabLink")
+            $(".CategoresForms div[data-tab='" + id + "']").remove()
+            $("select[data-name='Categores']").find("option[data-value='" + id + "']").removeAttr("hidden")
+            parent.remove()
+        })
+        $(".addCategory").click(function () {
+            var op = $(this).siblings("select[data-name='Categores']").find("option:selected")
+            if (!op.val() || !op.length) return false
+            var id = op.data("value")
+            var title = op.text()
+            op.prop("selected", false).prop("hidden", true)
+
+            $.ajax({
+                url: "{% url 'User_Group_View' 'RplaceIt' %}".replace('RplaceIt', id),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'GET',
+                success: function (response) {
+                    $(".CategoresTabs").prepend(`<div class="btn border w-100 text-end mt-2" data-tabLink="${id}">
+                        ${title}
+                        <input value="${id}" name="Categores[]" hidden>
+                            <span class="removeCategoryTab text-danger float-start"><i class="fa fa-times-circle"></i></span>
+                        </div>`)
+
+                    $(".CategoresForms div[data-tab]").addClass("d-none")
+                    $(".CategoresForms").append(`<div class="" data-tab="${id}">${showforms(response.option.form)}</div>`);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error: " + error);
+                }
+            });
+
+            var html = ''
+            $(".CategoresForms").append(html)
+        })
+
 
 
     });
