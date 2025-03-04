@@ -10,6 +10,10 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import Permission
 from django.forms.models import model_to_dict
+from django.urls import reverse
+from jdatetime import date as jdate
+from datetime import datetime
+from django.utils import timezone
 
 # simpleFront Start
 def home(request):
@@ -322,7 +326,8 @@ def Users_list(request):
 
 
 @login_required
-def User_Add(request):
+def User_Add_Edit(request, id=0):
+    # if request.resolver_match.url_name == 'User_Group_View':
 
     if request.method == 'GET':
         UOfilters = Q(kind='UserCategory')
@@ -332,20 +337,81 @@ def User_Add(request):
         UGfilters = Q(kind='UserGroup')
         UGfields = ['id', 'title']
         UserGroups=UserOption.objects.values(*UGfields).filter(UGfilters)
-        
-        filters = Q(id=1)
-        # user = User.objects.select_related('user_category').filter(filters).first()
-        user = User.objects.select_related('kind').filter(filters).first()
-
+   
+        filters = Q(id=id)
+        user = User.objects.select_related('kind').prefetch_related('groups').filter(filters).first()
         # user_data = model_to_dict(user)
-        # user_data['category'] = model_to_dict(user.kind) if user.kind else None
+        # user_data['category'] = model_to_dict(user.groups) if user.groups else None
         # return JsonResponse(user_data)
-    
-        return render(request, 'dashboard/User_View.html', {'UserOptions':UserOptions,
+
+        selectedLink = reverse('User_Add')     
+        return render(request, 'dashboard/User_View.html', {'selectedLink':selectedLink,'UserOptions':UserOptions,
         'UserGroups':UserGroups, 'pageTitle':'user add', 'User':user})
     
     elif request.method == 'POST':
-        return HttpResponse(request)
+
+        # if not id: 
+        #     user = User()
+        # else:  
+        try:
+            user = User.objects.get(id=id)
+        except User.DoesNotExist:
+            messages.error(request, 'کاربر مورد نظر یافت نشد')
+            return redirect('Users_list')
+        
+        user.sex = request.POST.get('sex')
+        user.kind_id = request.POST.get('kind')
+        user.alias = request.POST.get('alias')
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.mobile = request.POST.get('mobile')
+        user.email = request.POST.get('email')
+        user.ircode = request.POST.get('ircode')
+        user.username = request.POST.get('userusernamename')
+        # if request.POST.get('userpassword') and request.POST.get('userpassword') != '000':
+        #     user.set_password(request.POST.get('userpassword'))
+        
+        try:
+            if request.POST.get('birth'):
+                shamsi_date = request.POST.get('birth').split('/')
+                if len(shamsi_date) == 3:
+                    year, month, day = map(int, shamsi_date)
+                    miladi_date = jdate(year, month, day).togregorian()
+                    user.birth = datetime.combine(miladi_date, datetime.min.time())
+                else:
+                    user.birth = timezone.now()
+            else:
+                user.birth = timezone.now()
+        except Exception as e:
+            user.birth = timezone.now()
+
+        user_kind_data = {}
+        for key in request.POST:
+            if key.startswith('UserKindData_'):
+                field_name = key[13:]
+                values = request.POST.getlist(key)
+                values = [v for v in values if v.strip()]
+                if values:
+                    user_kind_data[field_name] = values
+        
+        user.des = user.des or {}
+        user.des['UserKindData'] = user_kind_data
+    
+        user.des['des'] = request.POST.get('userDes')
+
+        # return JsonResponse({
+        #     'data': dict(user_kind_data),
+        #     'files': dict(request.FILES)
+        # })
+
+        user.save()
+        
+        user.groups.clear()
+        for group_id in request.POST.getlist('Categores[]'):
+            user.groups.add(group_id)
+        
+        messages.success(request, 'کاربر با موفقیت ذخیره شد')
+        return redirect('User_Edit', id=user.id)
 
 
 @login_required

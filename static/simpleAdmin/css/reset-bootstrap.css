@@ -23,3 +23,33 @@
     --bs-alert-border-color: var(--bs-danger-border-subtle);
     --bs-alert-link-color: var(--bs-danger-text-emphasis);
 }
+
+input[readonly]{
+    background-color: #dee2e6;
+}
+
+.messages {
+    z-index: 1000;
+}
+.alert {
+    margin-bottom: 10px;
+    min-width: 300px;
+}
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+.alert-error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+label{
+    margin-bottom: 10px;
+}

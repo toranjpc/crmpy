@@ -153,7 +153,7 @@
       <input name="next" type="hidden" value="{{ request.path }}">
       <select name="language" onchange="this.form.submit()">
         <option value="fa">فارسی</option>
-        <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+        <option value="en">English</option>
       </select>
     </form>
 
@@ -163,7 +163,16 @@
 
   <!-- محتوای اصلی -->
   <div class="main-content expanded0" id="mainContent">
-
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     {% block content %}
     {% endblock %}
@@ -172,15 +181,17 @@
   <!-- Bootstrap 5 JS -->
   <script src="/static/simpleAdmin/js/bootstrap.bundle.min.js"></script>
   <script src="/static/simpleAdmin/js/popper.min.js"></script>
-  
+
   <script src="/static/assets/select2/select2.min.js"></script>
   <link href="/static/assets/select2/select2.min.css" rel="stylesheet">
-  
+
   <link href="/static/assets/confrim/jquery-confirm.min.css" rel="stylesheet" />
   <script src="/static/assets/confrim/jquery-confirm.min.js"></script>
-  
+
   <script src="/static/simpleAdmin/js/main.js"></script>
   <script>
+    $('select[name="language"] option[value="{{ LANGUAGE_CODE }}"]').prop("selected", true)
+
     function checkWidth() {
       if ($(window).width() <= 768) {
         $("#toggleMenu").click();
@@ -191,7 +202,18 @@
       checkWidth();
     });
 
+    {% if selectedLink %}
+    $(".sidebar-menu a[href='{{ selectedLink }}']").not('.baseUrl').addClass('active').closest("ul.submenu").addClass("open");
+    {% else %}
     $(".sidebar-menu a[href='{{ request.path }}']").not('.baseUrl').addClass('active').closest("ul.submenu").addClass("open");
+    {% endif %}
+
+    // محو شدن خودکار پیام‌ها
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    });
   </script>
   <!-- Custom JS -->
   {% block extJs %}

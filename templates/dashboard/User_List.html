@@ -84,7 +84,7 @@
                         <td>{{ user.mobile }}</td>
                         <td>{{ user.date_joined|to_jalali_Year }}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning">ویرایش</button>
+                            <a href="{% url 'User_Edit' user.id %}" class="btn btn-sm btn-warning">ویرایش</a>
                             <button class="btn btn-sm btn-danger">حذف</button>
                         </td>
                     </tr>

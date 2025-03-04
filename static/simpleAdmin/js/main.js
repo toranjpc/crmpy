@@ -72,3 +72,11 @@ $(document).on("change", ".checkboxLable input[type='checkbox']", function () {
             .closest('label').removeClass('bg-info').addClass('bg-secondary')
     }
 })
+
+// $(document).on("keyup", "input , textarea", function (e) {
+//     var key = e.which || e.keyCode || 0;
+//     // console.log(key)
+//     if (e.ctrlKey && key == 83) {
+//         $(this).closest("form:not(.ajaxform)").submit()
+//     }
+// })

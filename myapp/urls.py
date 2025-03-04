@@ -18,10 +18,11 @@ User_patterns = [
 
     
     path("", views.Users_list, name='Users_list'),
-    path("add/", views.User_Add, name='User_Add'),
-    path("view/<id>/", views.User_View, name='User_View'),
+    path("add/", views.User_Add_Edit, name='User_Add'),
+    path("edit/<int:id>/", views.User_Add_Edit, name='User_Edit'),
+
+    # path("view/<id>/", views.User_View, name='User_View'),
     path("copy/<int:id>/", views.User_Copy, name='User_Copy'),
-    path("edit/<int:id>/", views.User_Edit, name='User_Edit'),
     path("destroy/<int:id>/", views.User_Destroy, name='User_Destroy'),
 
 ]

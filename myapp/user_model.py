@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-# from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from jdatetime import date as jdate
+from django.utils import timezone
 
 class User(AbstractUser):
     
@@ -42,6 +43,13 @@ class User(AbstractUser):
         to_field='id'
     )
 
+    @property
+    def birth_shamsi(self):
+        if self.birth:
+            # تبدیل به timezone محلی
+            local_date = timezone.localtime(self.birth).date()
+            return jdate.fromgregorian(date=local_date).strftime('%Y/%m/%d')
+        return None
 
     def __str__(self):
         return self.username
