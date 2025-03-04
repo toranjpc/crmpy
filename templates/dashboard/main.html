@@ -81,12 +81,16 @@
         </ul>
       </li>
 
-      <li class="position-absolute w-100 p-0" style="bottom: 5px; right: 0px;">
-        <a href="{% url 'logout' %}" class="btn text-danger d-block w-100 text-dark">
-          <i class="fa fa-power-off"></i>
+    </ul>
+
+    <ul class="sidebar-menu">
+      <li class="w-100 p-0 mt-4" style="bottom: 5px; right: 0px;">
+        <a href="{% url 'logout' %}" class="btn text-dark d-block w-100">
+          <i class="fa fa-power-off text-danger"></i>
           {% trans "Log out" %}</a>
       </li>
     </ul>
+
   </div>
 
   <!-- نوار بالایی -->
