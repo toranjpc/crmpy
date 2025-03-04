@@ -11,7 +11,20 @@ body {
     /* فیروزه‌ای */
 }
 
-/* منوی کناری */
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+    direction: rtl;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
 .sidebar {
     width: 180px;
     max-width: 100%;
@@ -28,6 +41,12 @@ body {
     overflow-y: auto;
     z-index: 999;
     padding-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    direction: ltr;
 }
 
 .sidebar.collapsed {
@@ -107,6 +126,8 @@ body {
     align-items: center;
     padding: 10px 5px;
     font-weight: bolder;
+
+    flex-direction: row-reverse;
 }
 
 .submenu li a i {
