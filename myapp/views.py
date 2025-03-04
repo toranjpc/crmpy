@@ -116,10 +116,12 @@ def User_Category_Add(request):
 def User_Category_Edit(request, id):
     user_option = get_object_or_404(UserOption, id=id)
 
-    if request.method == 'POST':
-        if request.resolver_match.url_name == 'User_Kind_View':
-            user_option_data = model_to_dict(user_option)
-            return JsonResponse(user_option_data)
+    if request.resolver_match.url_name == 'User_Kind_View':
+        user_option_data = model_to_dict(user_option)
+        return JsonResponse(user_option_data)
+    
+    elif request.method == 'POST':
+
 
         title = request.POST.get('title')
         option = user_option.option or {}
@@ -229,12 +231,11 @@ def User_Group_Add(request):
 def User_Group_Edit(request, id):
     user_option = get_object_or_404(UserOption, id=id)
     
-    if request.method == 'GET':
-        if request.resolver_match.url_name == 'User_Group_View':
-            user_option_data = model_to_dict(user_option)
-            return JsonResponse(user_option_data)
+    if request.resolver_match.url_name == 'User_Group_View':
+        user_option_data = model_to_dict(user_option)
+        return JsonResponse(user_option_data)
     
-    if request.method == 'POST':
+    elif request.method == 'POST':
 
         title = request.POST.get('title')
         if not title:
@@ -322,15 +323,30 @@ def Users_list(request):
 
 @login_required
 def User_Add(request):
-    UOfilters = Q(kind='UserCategory')
-    UOfields = ['id', 'title']
-    UserOptions=UserOption.objects.values(*UOfields).filter(UOfilters)
 
-    UGfilters = Q(kind='UserGroup')
-    UGfields = ['id', 'title']
-    UserGroups=UserOption.objects.values(*UGfields).filter(UGfilters)
+    if request.method == 'GET':
+        UOfilters = Q(kind='UserCategory')
+        UOfields = ['id', 'title']
+        UserOptions=UserOption.objects.values(*UOfields).filter(UOfilters)
+
+        UGfilters = Q(kind='UserGroup')
+        UGfields = ['id', 'title']
+        UserGroups=UserOption.objects.values(*UGfields).filter(UGfilters)
+        
+        filters = Q(id=1)
+        # user = User.objects.select_related('user_category').filter(filters).first()
+        user = User.objects.select_related('kind').filter(filters).first()
+
+        # user_data = model_to_dict(user)
+        # user_data['category'] = model_to_dict(user.kind) if user.kind else None
+        # return JsonResponse(user_data)
     
-    return render(request, 'dashboard/User_View.html', {'UserOptions':UserOptions,'UserGroups':UserGroups, 'pageTitle':'user add'})
+        return render(request, 'dashboard/User_View.html', {'UserOptions':UserOptions,
+        'UserGroups':UserGroups, 'pageTitle':'user add', 'User':user})
+    
+    elif request.method == 'POST':
+        return HttpResponse(request)
+
 
 @login_required
 def User_View(request, id):

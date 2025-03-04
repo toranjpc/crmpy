@@ -21,7 +21,6 @@ class User(AbstractUser):
     mobile_verified_at = models.DateTimeField(blank=True, null=True)
     email = models.EmailField(max_length=191, unique=True, blank=True, null=True)  
     email_verified_at = models.DateTimeField(blank=True, null=True)
-    kind = models.IntegerField(default=0)
     per = models.JSONField(blank=True, null=True)
     des = models.JSONField(blank=True, null=True)
     # status = models.SmallIntegerField(default=1)
@@ -30,6 +29,19 @@ class User(AbstractUser):
     # فیلدهای زمان‌بندی
     # created_at = models.DateTimeField(auto_now_add=True)
     # updated_at = models.DateTimeField(auto_now=True)
+
+    # kind = models.IntegerField(default=0)
+    kind = models.ForeignKey(
+        'UserOption',
+        related_name='user_category',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+        limit_choices_to={'kind': 'UserCategory'},
+        to_field='id'
+    )
+
 
     def __str__(self):
         return self.username
