@@ -1,154 +1,160 @@
-{% extends "dashboard/main.html" %}
+{% extends 'dashboard/main.html' %}
 {% load i18n %}
 {% load filters %}
 
-{% block title %} {% trans pageTitle %} {% endblock %}
+{% block title %}
+  {% trans pageTitle %}
+{% endblock %}
 
 {% block content %}
-
-<div class="col-12">
+  <div class="col-12">
     <form action="" method="post">
-        {% csrf_token %}
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"></h5>
-                <div>
-                    <button type="submit" class="btn btn-sm btn-success">
-                        <span class="d-none d-md-inline">ذخیره &nbsp;</span>
-                        <i class="fa fa-save"></i>
-                    </button>
-                    <button type="reset" class="btn btn-sm btn-danger">
-                        <span class="d-none d-md-inline">پاکسازی فرم &nbsp;</span>
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="form-group row mb-2">
-                        <div class="col-4 col-md-2">
-                            <label for="status">جنسیت:</label>
-                            <select name="sex" class="form-control px-0 text-center" id="sex">
-                                <option value="1">آقا</option>
-                                <option value="2">خانم
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="kind">نوع کاربری:</label>
-                            <select name="kind" class="form-control" id="kind">
-                                <option value="" hidden>انتخاب کنید</option>
-                                {% for option in UserOptions %}
-                                <option value="{{ option.id }}">{{ option.title }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="alias">نام نمایشی:</label>
-                            <input type="text" class="form-control" id="alias" name="alias" maxlength="255"
-                                value="{{ User.alias|default:'' }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <div class="col">
-                            <label for="first_name">نام:</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" maxlength="255"
-                                value="{{ User.first_name|default:'' }}" />
-                        </div>
-                        <div class="col">
-                            <label for="last_name">نام خانوادگی:</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" maxlength="255"
-                                value="{{ User.last_name|default:'' }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <div class="col">
-                            <label for="mobile">تلفن همراه:</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" maxlength="255"
-                                value="{{ User.mobile|default:'' }}" />
-                        </div>
-                        <div class="col">
-                            <label for="email">ایمیل:</label>
-                            <input type="text" class="form-control" id="email" name="email" maxlength="255"
-                                value="{{ User.email|default:'' }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <div class="col">
-                            <label for="ircode">کد ملی:</label>
-                            <input type="text" class="form-control" id="ircode" name="ircode" maxlength="255"
-                                value="{{ User.ircode|default:'' }}" />
-                        </div>
-                        <div class="col">
-                            <label for="birth">تاریخ تولد:</label>
-                            <input type="text" class="form-control date" id="birth" name="birth" maxlength="255"
-                                value="{{ User.birth_shamsi|default:'' }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row mb-2">
-                        <div class="col">
-                            <label for="userusernamename">نام کاربری:</label>
-                            <input type="text" class="form-control" id="userusernamename" name="userusernamename"
-                                maxlength="255" value="{{ User.username|default:'' }}" />
-                        </div>
-                        <div class="col">
-                            {% if User.id %}
-                            <label for="userpassword">کلمه عبور:
-                                <span class="btn btn-sm text-warning" title="تعییر رمز عبور"
-                                    onclick="$('input[name=userpassword]').val('').removeAttr('readonly')">
-                                    <i class="fa fa-retweet"></i>
-                                </span>
-                            </label>
-                            <input type="text" class="form-control" id="userpassword" name="userpassword"
-                                maxlength="255" value="***" readonly />
-                            {% else %}
-                            <label for="userpassword">کلمه عبور: </label>
-                            <input type="text" class="form-control" id="userpassword" name="userpassword"
-                                maxlength="255" />
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="userDes">توضیحات:</label>
-                        <textarea class="form-control" id="userDes"
-                            name="userDes">{{ User.des.des|default:'' }}</textarea>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-12 userKindForm">
-                </div>
-
-                <div class="col-lg-2 col-md-2 col-3">
-                    <div class="w-100 position-relative">
-                        <!-- <label for="Categores">دستبندی:</label> -->
-                        <select data-name="Categores" class="form-control" id="Categores">
-                            <option value="" hidden>انتخاب دستبندی</option>
-                            {% for UserGroup in UserGroups %}
-                            <option data-value="{{ UserGroup.id }}">{{ UserGroup.title }}</option>
-                            {% endfor %}
-                        </select>
-                        <span class="btn text-info position-absolute addCategory" style="bottom: 0;left: 0;"><i
-                                class="fa fa-plus"></i></span>
-                    </div>
-                    <div class="mt-2 w-100 CategoresTabs h-100 overflow-y-auto" style="max-height: 350px;"></div>
-                </div>
-                <div class="col CategoresForms">
-                </div>
-
-            </div>
+      {% csrf_token %}
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">{{ User.first_name|default:'' }} {{ User.last_name|default:'' }}</h5>
+          <div>
+            <button type="submit" class="btn btn-sm btn-success">
+              <span class="d-none d-md-inline">ذخیره &nbsp;</span>
+              <i class="fa fa-save"></i>
+            </button>
+            <button type="reset" class="btn btn-sm btn-danger">
+              <span class="d-none d-md-inline">پاکسازی فرم &nbsp;</span>
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
         </div>
+        <div class="card-body row">
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="form-group row mb-2">
+              <div class="col-4 col-md-2">
+                <label for="status">جنسیت:</label>
+                <select name="sex" class="form-control px-0 text-center" id="sex">
+                  <option value="1">آقا</option>
+                  <option value="2">خانم</option>
+                </select>
+              </div>
+              <div class="col">
+                <label for="kind">نوع کاربری:</label>
+                <select name="kind" class="form-control" id="kind">
+                  <option value="" hidden>انتخاب کنید</option>
+                  {% for option in UserOptions %}
+                    <option value="{{ option.id }}">{{ option.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                <label for="alias">نام نمایشی:</label>
+                <input type="text" class="form-control" id="alias" name="alias" maxlength="255" value="{{ User.alias|default:'' }}" />
+              </div>
+            </div>
+            <div class="form-group row mb-2">
+              <div class="col">
+                <label for="first_name">نام:</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" maxlength="255" value="{{ User.first_name|default:'' }}" />
+              </div>
+              <div class="col">
+                <label for="last_name">نام خانوادگی:</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" maxlength="255" value="{{ User.last_name|default:'' }}" />
+              </div>
+            </div>
+            <div class="form-group row mb-2">
+              <div class="col">
+                <label for="mobile">تلفن همراه:</label>
+                <input type="text" class="form-control" id="mobile" name="mobile" maxlength="255" value="{{ User.mobile|default:'' }}" />
+              </div>
+              <div class="col">
+                <label for="email">ایمیل:</label>
+                <input type="text" class="form-control" id="email" name="email" maxlength="255" value="{{ User.email|default:'' }}" />
+              </div>
+            </div>
+            <div class="form-group row mb-2">
+              <div class="col">
+                <label for="ircode">کد ملی:</label>
+                <input type="text" class="form-control" id="ircode" name="ircode" maxlength="255" value="{{ User.ircode|default:'' }}" />
+              </div>
+              <div class="col">
+                <label for="birth">تاریخ تولد:</label>
+                <input type="text" class="form-control date" id="birth" name="birth" maxlength="255" value="{{ User.birth_shamsi|default:'' }}" />
+              </div>
+            </div>
+            <div class="form-group row mb-2">
+              <div class="col">
+                <label for="userusernamename">نام کاربری:</label>
+                <input type="text" class="form-control" id="userusernamename" name="userusernamename" maxlength="255" value="{{ User.username|default:'' }}" />
+              </div>
+              <div class="col">
+                {% if User.id %}
+                  <label for="userpassword">
+                    کلمه عبور:
+                    <span class="btn btn-sm text-warning" title="تعییر رمز عبور" onclick="$('input[name=userpassword]').val('').removeAttr('readonly')"><i class="fa fa-retweet"></i></span>
+                  </label>
+                  <input type="text" class="form-control" id="userpassword" name="userpassword" maxlength="255" value="***" readonly />
+                {% else %}
+                  <label for="userpassword">کلمه عبور:</label>
+                  <input type="text" class="form-control" id="userpassword" name="userpassword" maxlength="255" />
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userDes">توضیحات:</label>
+              <textarea class="form-control" id="userDes" name="userDes">{{ User.des.des|default:'' }}</textarea>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 col-12 userKindForm"></div>
+
+          <div class="col-lg-2 col-md-2 col-3">
+            <div class="w-100 position-relative">
+              <!-- <label for="Categores">دستبندی:</label> -->
+              <select data-name="Categores" class="form-control" id="Categores">
+                <option value="" hidden>انتخاب دستبندی</option>
+                {% for UserGroup in UserGroups %}
+                  <option data-value="{{ UserGroup.id }}">{{ UserGroup.title }}</option>
+                {% endfor %}
+              </select>
+              <span class="btn text-info position-absolute addCategory" style="bottom: 0;left: 0;"><i class="fa fa-plus"></i></span>
+            </div>
+            <div class="mt-2 w-100 CategoresTabs h-100 overflow-y-auto" style="max-height: 350px;"></div>
+          </div>
+          <div class="col CategoresForms"></div>
+        </div>
+      </div>
     </form>
-</div>
-
-
+  </div>
 {% endblock %}
 
 {% block extJs %}
-<script src="/static/assets/form_bilder/form-render.min.js?v=2"></script>
-<script type="text/javascript" src="/static/assets/DatePicker/persian-datepicker.js"></script>
-<link type="text/css" href="/static/assets/DatePicker/persian-datepicker.css" rel="stylesheet" />
+  <script src="/static/assets/form_bilder/form-render.min.js?v=2"></script>
+  <script type="text/javascript" src="/static/assets/DatePicker/persian-datepicker.js"></script>
+  <link type="text/css" href="/static/assets/DatePicker/persian-datepicker.css" rel="stylesheet" />
 
-<script>
-    
+  <script>
+    {% comment %} console.log({{ user.groups.all|default:"[]"|safe }}) {% endcomment %}
+
+    var appendFroms=(op,response)=>{
+        op.prop("selected", false).prop("hidden", true)
+
+        $(".CategoresTabs").prepend(`<div class="btn border w-100 text-end mt-2" data-tabLink="${response.id}">
+            ${response.title}
+            <input value="${response.id}" name="Categores[]" hidden>
+                <span class="removeCategoryTab text-danger float-start"><i class="fa fa-times-circle"></i></span>
+            </div>`)
+
+        $(".CategoresForms div[data-tab]").addClass("d-none")
+        if(response.option.form) $(".CategoresForms").append(`<div class="" data-tab="${response.id}">${showforms(response.option.form,'userCategoresData')}</div>`);
+    }
+    {% if user.groups.all %}
+        {% for group in user.groups.all %}
+        appendFroms($("select[data-name='Categores']").find("option[data-value='{{ group.id|safe }}']"),
+        {
+            id: {{ group.id|safe }},
+            title: '{{ group.title|safe|escapejs }}',
+            option: {'form':JSON.stringify({{ group.option.form|safe }})},
+        });
+        {% endfor %}
+    {% endif %}
+
+
     $("select[name=sex] option[value='{{ User.sex|default:'' }}']").prop("selected", true)
     $("select[name=kind] option[value='{{ User.kind_id|default:'' }}']").prop("selected", true).closest("div").find("label").append(" {{ User.kind.title|default:'' }} ")
     $(".userKindForm").html(showforms(`{{ User.kind.option.form|default:'[]'|escapejs }}`, 'UserKindData', {{ User.des.UserKindData|default:''|safe }}))
@@ -171,7 +177,6 @@
             if (!op.val() || !op.length) return false
             var id = op.data("value")
             var title = op.text()
-            op.prop("selected", false).prop("hidden", true)
 
             $.ajax({
                 url: "{% url 'User_Group_View' 'RplaceIt' %}".replace('RplaceIt', id),
@@ -180,14 +185,7 @@
                 },
                 type: 'GET',
                 success: function (response) {
-                    $(".CategoresTabs").prepend(`<div class="btn border w-100 text-end mt-2" data-tabLink="${id}">
-                        ${title}
-                        <input value="${id}" name="Categores[]" hidden>
-                            <span class="removeCategoryTab text-danger float-start"><i class="fa fa-times-circle"></i></span>
-                        </div>`)
-
-                    $(".CategoresForms div[data-tab]").addClass("d-none")
-                    $(".CategoresForms").append(`<div class="" data-tab="${id}">${showforms(response.option.form)}</div>`);
+                    appendFroms(op,response)
                 },
                 error: function (xhr, status, error) {
                     console.error("Error: " + error);
@@ -232,11 +230,11 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log(response);
+                //console.log(response);
                 location.reload()
             },
             error: function (xhr, status, error) {
-                console.log(error);
+                //console.log(error);
             }
         });
     });

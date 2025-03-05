@@ -14,6 +14,7 @@ from django.urls import reverse
 from jdatetime import date as jdate
 from datetime import datetime
 from django.utils import timezone
+import json
 
 # simpleFront Start
 def home(request):
@@ -340,14 +341,24 @@ def User_Add_Edit(request, id=0):
    
         filters = Q(id=id)
         user = User.objects.select_related('kind').prefetch_related('groups').filter(filters).first()
+
         # user_data = model_to_dict(user)
-        # user_data['category'] = model_to_dict(user.groups) if user.groups else None
+        # user_data['groups'] = model_to_dict(user.groups) if user.groups else None
         # return JsonResponse(user_data)
+        
 
         selectedLink = reverse('User_Add')     
-        return render(request, 'dashboard/User_View.html', {'selectedLink':selectedLink,'UserOptions':UserOptions,
-        'UserGroups':UserGroups, 'pageTitle':'user add', 'User':user})
     
+        return render(request, 'dashboard/User_View.html', 
+                      {'selectedLink':selectedLink,
+                       'UserOptions':UserOptions,
+                        'UserGroups':UserGroups,
+                        'pageTitle':'user add',
+                        'User':user,
+                        # 'selected_groups_ids': selected_groups_ids
+                        }
+        )
+
     elif request.method == 'POST':
 
         # if not id: 

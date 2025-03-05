@@ -43,6 +43,13 @@ class User(AbstractUser):
         to_field='id'
     )
 
+    groups = models.ManyToManyField(
+        'UserOption',
+        related_name='user_groups',
+        blank=True,
+        limit_choices_to={'kind': 'UserGroup'}
+    )
+
     @property
     def birth_shamsi(self):
         if self.birth:
