@@ -355,21 +355,20 @@ def User_Add_Edit(request, id=0):
                         'UserGroups':UserGroups,
                         'pageTitle':'user add',
                         'User':user,
-                        # 'selected_groups_ids': selected_groups_ids
                         }
         )
 
     elif request.method == 'POST':
 
-        # if not id: 
-        #     user = User()
-        # else:  
-        try:
-            user = User.objects.get(id=id)
-        except User.DoesNotExist:
-            messages.error(request, 'کاربر مورد نظر یافت نشد')
-            return redirect('Users_list')
-        
+        if not id: 
+            user = User()
+        else:  
+            try:
+                user = User.objects.get(id=id)
+            except User.DoesNotExist:
+                messages.error(request, 'کاربر مورد نظر یافت نشد')
+                return redirect('Users_list')
+            
         user.sex = request.POST.get('sex')
         user.kind_id = request.POST.get('kind')
         user.alias = request.POST.get('alias')
@@ -380,8 +379,7 @@ def User_Add_Edit(request, id=0):
         user.ircode = request.POST.get('ircode')
         user.username = request.POST.get('userusernamename')
         # if request.POST.get('userpassword') and request.POST.get('userpassword') != '000':
-        #     user.set_password(request.POST.get('userpassword'))
-        
+        #     user.set_password(request.POST.get('userpassword'))            
         try:
             if request.POST.get('birth'):
                 shamsi_date = request.POST.get('birth').split('/')
@@ -395,7 +393,6 @@ def User_Add_Edit(request, id=0):
                 user.birth = timezone.now()
         except Exception as e:
             user.birth = timezone.now()
-
         user_kind_data = {}
         for key in request.POST:
             if key.startswith('UserKindData_'):
@@ -403,25 +400,23 @@ def User_Add_Edit(request, id=0):
                 values = request.POST.getlist(key)
                 values = [v for v in values if v.strip()]
                 if values:
-                    user_kind_data[field_name] = values
-        
+                    user_kind_data[field_name] = values            
         user.des = user.des or {}
-        user.des['UserKindData'] = user_kind_data
-    
+        user.des['UserKindData'] = user_kind_data        
         user.des['des'] = request.POST.get('userDes')
-
         # return JsonResponse({
         #     'data': dict(user_kind_data),
         #     'files': dict(request.FILES)
         # })
-
-        user.save()
+        user.save()            
         
         user.groups.clear()
         for group_id in request.POST.getlist('Categores[]'):
-            user.groups.add(group_id)
-        
+            user.groups.add(group_id)            
+            
         messages.success(request, 'کاربر با موفقیت ذخیره شد')
+        
+        return JsonResponse({'status':'success','id':user.id})
         return redirect('User_Edit', id=user.id)
 
 

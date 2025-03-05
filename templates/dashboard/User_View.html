@@ -143,7 +143,8 @@
         $(".CategoresForms div[data-tab]").addClass("d-none")
         if(response.option.form) $(".CategoresForms").append(`<div class="" data-tab="${response.id}">${showforms(response.option.form,'userCategoresData')}</div>`);
     }
-    {% if user.groups.all %}
+    console.log({{user.id}})
+    {% if user.id and user.groups.all %}
         {% for group in user.groups.all %}
         appendFroms($("select[data-name='Categores']").find("option[data-value='{{ group.id|safe }}']"),
         {
@@ -230,8 +231,8 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                //console.log(response);
-                location.reload()
+                console.log(response);
+                location.href="{% url 'User_Edit' 0 %}".replace("0",response.id)
             },
             error: function (xhr, status, error) {
                 //console.log(error);
